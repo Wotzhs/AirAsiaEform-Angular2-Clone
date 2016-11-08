@@ -7,8 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 
 export class FormComponent implements OnInit {
-  @Input() lang:string;
+  @Input() preferredLanguage:string;
   ngOnInit(){
-    console.log(this.lang)
+    console.log(this.preferredLanguage)
   }
 }

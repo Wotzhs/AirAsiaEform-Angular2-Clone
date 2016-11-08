@@ -2,4 +2,4 @@
 <select class="" name="selLang" #selectedLanguage (change)="updatePreferredLanguage(selectedLanguage.value)">
   <option *ngFor="let language of languages" value="{{language.value}}">{{language.display}}</option>
 </select>
-<form [lang]="preferredLanguage"></form>
+<form [preferredLanguage]="preferredLanguage"></form>
