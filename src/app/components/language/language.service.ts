@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-const LANGUAGES: Object[] = [
+const LANGUAGES: any[] = [
     {label: "Please select your preferred language", value:"en-gb", display:"English"},
     {label: "언어를 선택하세요", value:"ko-kr", display:"한국어"},
     {label: "ご希望の言語をお選びください", value:"ja-jp", display:"日本語"},

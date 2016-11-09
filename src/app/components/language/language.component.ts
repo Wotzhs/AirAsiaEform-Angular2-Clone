@@ -9,7 +9,7 @@ import {LanguagesService} from './language.service';
 })
 
 export class LanguageComponent implements OnInit {
-  languages: Object[] = this.languagesService.getLanguages();
+  languages: any[] = this.languagesService.getLanguages();
   preferredLanguage: string = "en-gb";
   languageLabel: string;
 
