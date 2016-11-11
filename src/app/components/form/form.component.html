@@ -1,171 +1,328 @@
-<div class="well">
-  <div class="row form-group">
-    <div class="col-md-3">
-      <label for="firstlastname" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-4 col-xs-12">
-        <input class="form-control" type="text" name="firstname" value="">
+<form [formGroup]="eform" (ngSubmit)="haha(eform.value)">
+  <div class="well">
+    <div class="row form-group"> <!-- first last name input -->
+      <div class="col-md-3"
+        [class.has-error]="
+        (!eform.controls.firstname.valid || !eform.controls.lastname.valid) && (submitted || (eform.controls.firstname.touched || eform.controls.lastname.touched))
+      ">
+        <label for="firstlastname" class="control-label"><span>*</span> {{labels.name.main}}</label>
       </div>
-      <div class="col-md-4 col-xs-12">
-        <input class="form-control" type="text" name="lastname" value="">
+      <div class="col-md-9">
+        <div class="col-md-4 col-xs-12" [class.has-error]="!eform.controls.firstname.valid && (submitted || eform.controls.firstname.touched)">
+          <input class="form-control" type="text" formControlName="firstname">
+          <label for="firstname" *ngIf="!eform.controls.firstname.valid && (submitted || eform.controls.firstname.touched)"
+              class="control-label">{{labels.name.err[0]}}</label>
+        </div>
+        <div class="col-md-4 col-xs-12" [class.has-error]="!eform.controls.lastname.valid && (submitted || eform.controls.lastname.touched)">
+          <input class="form-control" type="text" formControlName="lastname">
+          <label for="lastname" *ngIf="!eform.controls.lastname.valid && (submitted || eform.controls.lastname.touched)"
+              class="control-label">{{labels.name.err[1]}}</label>
+        </div>
+      </div>
+    </div> <!-- end of first last name input -->
+
+    <div class="row form-group"[class.has-error]="!eform.controls.email.valid && (submitted || eform.controls.email.touched)">
+      <div class="col-md-3">
+        <label for="email" class="control-label"><span>*</span> {{labels.email.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-4 col-xs-12">
+          <input class="form-control" type="email" formControlName="email">
+          <label for="email" *ngIf="!eform.controls.email.valid && (submitted || eform.controls.email.touched)"
+              class="control-label">{{labels.email.err}}</label>
+        </div>
+      </div>
+    </div> <!-- end of email input -->
+
+    <div class="row form-group"> <!-- mobile phone input -->
+      <div class="col-md-3" [class.has-error]="!eform.controls.mobilenum.valid && (submitted || eform.controls.mobilenum.touched)">
+        <label for="mobilenum" class="control-label"><span>*</span> {{labels.mobilenum.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-2 col-xs-12">
+          <select class="form-control" formControlName="mobilenumdialcode" (ngModelChange)="setMobileDialInfo($event)">
+            <option *ngFor="let dialCode of dialCodes" [ngValue]="dialCode">{{dialCode.name}} ({{dialCode.code}})</option>
+            <option [selected]="selectedMobileCode" disabled hidden>{{selectedMobileCode}}</option>
+          </select>
+        </div>
+        <div class="col-md-5 col-xs-12" [class.has-error]="!eform.controls.mobilenum.valid && (submitted || eform.controls.mobilenum.touched)">
+          <input class="form-control" type="text" formControlName="mobilenum" [value]="this.eform.controls.mobilenum.value">
+          <label for="mobilenum" *ngIf="!eform.controls.mobilenum.valid && (submitted || eform.controls.mobilenum.touched)"
+              class="control-label">{{labels.mobilenum.err}}</label>
+        </div>
+      </div>
+    </div> <!-- end of mobile phone input -->
+
+    <div class="row form-group"> <!-- home phone input -->
+      <div class="col-md-3">
+        <label for="homenum" class="control-label">{{labels.homenum.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-2 col-xs-12">
+          <select class="form-control" formControlName="homenumdialcode" (ngModelChange)="setHomeDialInfo($event)">
+              <option *ngFor="let dialCode of dialCodes" [ngValue]="dialCode">{{dialCode.name}} ({{dialCode.code}})</option>
+              <option [selected]="selectedHomeCode" disabled hidden>{{selectedHomeCode}}</option>
+          </select>
+        </div>
+        <div class="col-md-5 col-xs-12">
+          <input class="form-control" type="text" formControlName="homenum" [value]="this.eform.controls.homenum.value">
+        </div>
+      </div>
+    </div> <!-- end of home phone input -->
+
+    <div class="row form-group" [class.has-error]="!eform.controls.case.valid && (submitted || eform.controls.case.touched)"> <!-- case category input -->
+      <div class="col-md-3">
+        <label for="casecategory" class="control-label"><span>*</span> {{labels.casecategory.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-5 col-xs-12">
+          <select class="form-control" #case formControlName="case" (change)="fetchTypeOption(case.value)">
+            <option disabled hidden></option>
+            <option *ngFor="let caseOption of caseOptions" [value]="caseOption.value">{{caseOption.display}}</option>
+          </select>
+          <label for="casecategory" *ngIf="!eform.controls.case.valid && (submitted || eform.controls.case.touched)"
+              class="control-label">{{labels.casecategory.err}}</label>
+        </div>
+      </div>
+    </div> <!-- end of case category input -->
+
+    <div class="row form-group" [class.has-error]="!eform.controls.type.valid && (submitted || eform.controls.type.touched)"> <!-- type input -->
+      <div class="col-md-3">
+        <label for="typecategory" class="control-label"><span>*</span> {{labels.typecategory.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-5 col-xs-12">
+          <select class="form-control" formControlName="type">
+            <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">{{typeOption.display}}</option>
+          </select>
+          <label for="casecategory" *ngIf="!eform.controls.type.valid && (submitted || eform.controls.type.touched)"
+              class="control-label">{{labels.typecategory.err}}</label>
+        </div>
+      </div>
+    </div> <!-- end of type input -->
+
+    <div class="row form-group"> <!-- booking number input -->
+      <div class="col-md-3">
+        <label for="bookingnumber" class="control-label">{{labels.bookingnumber.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-5 col-xs-12">
+          <input class="form-control" type="text" formControlName="bookingnumber">
+        </div>
+      </div>
+    </div> <!-- end of booking number input -->
+
+    <div class="row form-group" > <!-- flight number input -->
+      <div class="col-md-3"
+        [class.has-error]="
+        (!eform.controls.flightcode.valid || !eform.controls.flightnumber.valid) && (submitted || (eform.controls.flightcode.touched || eform.controls.flightnumber.touched))
+      ">
+        <label for="flightnumber" class="control-label"><span>*</span> {{labels.flightnumber.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-3 col-xs-5" [class.has-error]="!eform.controls.flightcode.valid && (submitted || eform.controls.flightcode.touched)">
+          <select class="form-control" formControlName="flightcode">
+            <option disabled hidden></option>
+            <option *ngFor="let flightOption of flightOptions" [value]="flightOption.value">{{flightOption.display[preferredLanguage] || flightOption.display}}</option>
+          </select>
+          <label for="flightcode" *ngIf="!eform.controls.flightcode.valid && (submitted || eform.controls.flightcode.touched)"
+              class="control-label">{{labels.flightnumber.err[0]}}</label>
+        </div>
+        <div class="col-md-4 col-xs-7" [class.has-error]="!eform.controls.flightnumber.valid && (submitted || eform.controls.flightnumber.touched)">
+          <input class="form-control" type="text" formControlName="flightnumber">
+          <label for="flightnumber" *ngIf="!eform.controls.flightnumber.valid && (submitted || eform.controls.flightnumber.touched)"
+              class="control-label">{{labels.flightnumber.err[1]}}</label>
+        </div>
+      </div>
+    </div> <!-- end of flight number input -->
+
+    <div class="row form-group"> <!-- flight time input -->
+      <div class="col-md-3">
+        <label for="flighttime" class="control-label">{{labels.flightdatetime.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-4 col-xs-12">
+          <input class="form-control" type="text" formControlName="flightdate">
+        </div>
+        <div class="col-md-2 col-xs-12">
+          <input class="form-control" type="text" formControlName="flighttime">
+        </div>
+        <div class="col-md-2 col-xs-6">
+          <select class="form-control" formControlName="flighthour">
+            <option>am</option>
+            <option>pm</option>
+          </select>
+        </div>
+        <div class="col-md-2 col-xs-6">e.g. 03:45</div>
+      </div>
+    </div> <!-- end of flight time input -->
+
+    <div class="row form-group"> <!-- attachment input -->
+      <div class="col-md-3">
+        <label for="attachment">{{labels.attachment.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-4 col-xs-12">
+          <input class="form-control" type="file" formControlName="attachment1">
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <input class="form-control" type="file" formControlName="attachment2">
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <input class="form-control" type="file" formControlName="attachment3">
+        </div>
+      </div>
+    </div> <!-- end of attachment input -->
+
+    <div class="row form-group" [class.has-error]="!eform.controls.feedback.valid && (submitted || eform.controls.feedback.touched)"> <!-- feedback input -->
+      <div class="col-md-3">
+        <label for="feedback" class="control-label"><span>*</span> {{labels.feedback.main}}</label>
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-8 col-xs-12">
+          <textarea class="form-control" formControlName="feedback" rows="5" wrap="soft"></textarea>
+          <label for="feedback" *ngIf="!eform.controls.feedback.valid && (submitted || eform.controls.feedback.touched)"
+              class="control-label">{{labels.feedback.err}}</label>
+        </div>
+      </div>
+    </div> <!-- end of feedback input -->
+
+    <!--  -->
+    <div *ngIf="this.eform.controls.case.value === '8'"> <!-- refund div wrap -->
+      <div class="row form-group" formGroupName="bank" [class.has-error]="!eform.controls.bank.controls.paymentmethod.valid && (submitted || eform.controls.bank.controls.paymentmethod.touched)">
+        <div class="col-md-3">
+          <label for="paymentmethod" class="control-label"><span>*</span> {{labels.paymentmethod.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" [class.has-error]="!eform.controls.bank.controls.paymentmethod.valid && (submitted || eform.controls.bank.controls.paymentmethod.touched)">
+            <select class="form-control" formControlName="paymentmethod">
+              <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.value" [selected]="paymentMethod.value === '1'">{{paymentMethod.display}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.name.valid && (submitted || eform.controls.bank.controls.name.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankname">{{labels.bankname.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="name">
+            <label for="bankname" *ngIf="!eform.controls.bank.controls.name.valid && (submitted || eform.controls.bank.controls.name.touched)"
+                class="control-label">{{labels.bankname.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.accountholdername.valid && (submitted || eform.controls.bank.controls.accountholdername.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankholdername">{{labels.bankholdername.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="accountholdername">
+            <label for="bankname" *ngIf="!eform.controls.bank.controls.accountholdername.valid && (submitted || eform.controls.bank.controls.accountholdername.touched)"
+                class="control-label">{{labels.bankholdername.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.accountnumber.valid && (submitted || eform.controls.bank.controls.accountnumber.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankaccountnumber">{{labels.bankaccountnumber.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="accountnumber">
+            <label for="bankaccountnumber" *ngIf="!eform.controls.bank.controls.accountnumber.valid && (submitted || eform.controls.bank.controls.accountnumber.touched)"
+                class="control-label">{{labels.bankaccountnumber.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.branch.valid && (submitted || eform.controls.bank.controls.branch.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="branch">{{labels.bankbranch.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="branch">
+            <label for="branch" *ngIf="!eform.controls.bank.controls.branch.valid && (submitted || eform.controls.bank.controls.branch.touched)"
+                class="control-label">{{labels.bankbranch.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.currency.valid && (submitted || eform.controls.bank.controls.currency.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankcurrency">{{labels.bankcurrency.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="currency">
+            <label for="bankcurrency" *ngIf="!eform.controls.bank.controls.currency.valid && (submitted || eform.controls.bank.controls.currency.touched)"
+                class="control-label">{{labels.bankcurrency.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.routecode.valid && (submitted || eform.controls.bank.controls.routecode.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankroutecode">{{labels.bankroutecode.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="routecode">
+            <label for="bankroutecode" *ngIf="!eform.controls.bank.controls.routecode.valid && (submitted || eform.controls.bank.controls.routecode.touched)"
+                class="control-label">{{labels.bankroutecode.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.routenumber.valid && (submitted || eform.controls.bank.controls.routenumber.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankroutenumber">{{labels.bankroutenumber.main}}</label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="routenumber">
+            <label for="bankroutenumber" *ngIf="!eform.controls.bank.controls.routenumber.valid && (submitted || eform.controls.bank.controls.routenumber.touched)"
+                class="control-label">{{labels.bankroutenumber.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <p>{{acknowledgementMesssage.message}}</p>
+            <div class="checkbox">
+              <label for="">
+                <input type="checkbox" name="name">
+                {{acknowledgementMesssage.check}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- end of refund div wrap -->
+
+    <br>
+    <div class="row">
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <button type="button" class="btn btn-danger btn-block">
+          <span class="glyphicon glyphicon-trash"></span>&emsp;
+          {{labels.button.reset}}
+        </button>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <button type="submit" class="btn btn-success btn-block">
+          <span class="glyphicon glyphicon-send"></span>&emsp;
+          {{labels.button.submit}}
+        </button>
       </div>
     </div>
   </div>
-
-  <div class="row form-group"> <!-- email input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-4 col-xs-12">
-        <input class="form-control" type="text" name="email" value="">
-      </div>
-    </div>
-  </div> <!-- end of email input -->
-
-  <div class="row form-group"> <!-- mobile phone input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-2 col-xs-12">
-        <select class="form-control" name="optMobileNum">
-          <option></option>
-        </select>
-      </div>
-      <div class="col-md-5 col-xs-12">
-        <input class="form-control" type="text" name="mobileNumber" value="">
-      </div>
-    </div>
-  </div> <!-- end of mobile phone input -->
-
-  <div class="row form-group"> <!-- home phone input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-2 col-xs-12">
-        <select class="form-control" name="optHomeNum">
-          <option></option>
-        </select>
-      </div>
-      <div class="col-md-5 col-xs-12">
-        <input class="form-control" type="text" name="homeNumber" value="">
-      </div>
-    </div>
-  </div> <!-- end of home phone input -->
-
-  <div class="row form-group"> <!-- case category input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-5 col-xs-12">
-        <select class="form-control" name="caseCategory">
-          <option></option>
-        </select>
-      </div>
-    </div>
-  </div> <!-- end of case category input -->
-
-  <div class="row form-group"> <!-- type input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-5 col-xs-12">
-        <select class="form-control" name="typeCategory">
-          <option></option>
-        </select>
-      </div>
-    </div>
-  </div> <!-- end of type input -->
-
-  <div class="row form-group"> <!-- booking number input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-5 col-xs-12">
-        <input type="text" name="bookingNumber" value="">
-      </div>
-    </div>
-  </div> <!-- end of booking number input -->
-
-  <div class="row form-group"> <!-- flight number input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-3 col-xs-5">
-        <select class="form-control" name="carrierCode">
-          <option></option>
-        </select>
-      </div>
-      <div class="col-md-4 col-xs-7">
-        <input type="text" name="flightNumber" value="" maxlength="4">
-      </div>
-    </div>
-  </div> <!-- end of flight number input -->
-
-  <div class="row form-group"> <!-- flight time input -->
-    <div class="col-md-3">
-      <label for="email" class="control-label"></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-4 col-xs-12">
-        <input type="text" name="flightDate" value="">
-      </div>
-      <div class="col-md-2 col-xs-12">
-        <input type="text" name="flightTime" value="" maxlength="4">
-      </div>
-      <div class="col-md-2 col-xs-6">
-        <select class="form-control" name="flightHour">
-          <option>am</option>
-          <option>pm</option>
-        </select>
-      </div>
-      <div class="col-md-2 col-xs-6">
-        <span class="field-note">e.g. 03:45</span>
-      </div>
-    </div>
-  </div> <!-- end of flight time input -->
-
-  <div class="row form-group"> <!-- attachment input -->
-    <div class="col-md-3">
-      <label for=""></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-4 col-xs-12">
-        <input class="form-control" type="file" name="files1">
-      </div>
-      <div class="col-md-4 col-xs-12">
-        <input class="form-control" type="file" name="files2">
-      </div>
-      <div class="col-md-4 col-xs-12">
-        <input class="form-control" type="file" name="files3">
-      </div>
-    </div>
-  </div> <!-- end of attachment input -->
-
-  <div class="row form-group">
-    <div class="col-md-3 col-xs-12">
-      <label for=""></label>
-    </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-3">
-      <label for=""></label>
-    </div>
-    <div class="col-md-9">
-      <div class="col-md-8 col-xs-12">
-        <textarea class="form-control" name="feedbackDesc" rows="5" wrap="soft"></textarea>
-      </div>
-    </div>
-
-  </div>
-  <button type="button" class="btn-large pull-right btn-btm">Submit</button>
-  <button type="button" class="btn-large pull-right btn-btm">Reset</button>
-  <br>
-</div>
+</form>

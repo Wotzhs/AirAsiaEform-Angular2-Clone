@@ -1,5 +1,12 @@
-<label>{{languageLabel}}</label>
-<select class="" name="selLang" #selectedLanguage (change)="updatePreferredLanguage(selectedLanguage.value)">
-  <option *ngFor="let language of languages" value="{{language.value}}">{{language.display}}</option>
-</select>
-<form [preferredLanguage]="preferredLanguage"></form>
+<div class="row">
+  <div class="col-md-10">
+    <label class="pull-right">{{languageLabel}}</label>
+  </div>
+  <div class="col-md-2">
+    <select class="form-control" name="selLang" #selectedLanguage (change)="updatePreferredLanguage(selectedLanguage.value)">
+      <option *ngFor="let language of languages" value="{{language.value}}">{{language.display}}</option>
+    </select>
+  </div>
+</div>
+<br>
+<eform [preferredLanguage]="preferredLanguage"></eform>

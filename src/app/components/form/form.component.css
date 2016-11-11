@@ -1,0 +1,13 @@
+span{
+  margin-left: -10px;
+  color:red;
+}
+.panel.panel-default{
+  margin:14px;
+}
+.panel-body{
+  padding:15px;
+}
+.panel-body > p{
+  margin-bottom: 10px;
+}
