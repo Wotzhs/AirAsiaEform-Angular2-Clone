@@ -89,6 +89,7 @@ export class FormComponent implements OnInit {
   ngDoCheck(){
     this.labels = this.formService.getLabels(this.preferredLanguage);
     this.caseOptions = this.formService.getCaseOptions(this.preferredLanguage);
+    this.fetchTypeOption(this.eform.controls['case'].value);
     if (this.eform.controls['case'].value === "8"){
       this.paymentMethods = this.formService.getPaymentMethods(this.preferredLanguage);
       this.acknowledgementMesssage = this.formService.getAcknowledgementMessage(this.preferredLanguage);
@@ -97,6 +98,7 @@ export class FormComponent implements OnInit {
   haha(a:any){
     // alert(JSON.stringify(a))
     console.log(a)
+    console.log(JSON.stringify(a))
     // this.eform.patchValue({mobilenumdialcode: a.code})
     this.submitted = true;
   }

@@ -1,4 +1,4 @@
-<form [formGroup]="eform" (ngSubmit)="haha(eform.value)">
+<form [formGroup]="eform" (ngSubmit)="haha(eform.value)" >
   <div class="well">
     <div class="row form-group"> <!-- first last name input -->
       <div class="col-md-3"
@@ -142,10 +142,14 @@
       </div>
       <div class="col-md-9">
         <div class="col-md-4 col-xs-12">
-          <input class="form-control" type="text" formControlName="flightdate">
+          <div class="input-group">
+            <input class="form-control" type="text" formControlName="flightdate">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-th"></span></div>
+          </div>
+
         </div>
         <div class="col-md-2 col-xs-12">
-          <input class="form-control" type="text" formControlName="flighttime">
+          <input class="form-control" type="text" formControlName="flighttime" id="datepicker">
         </div>
         <div class="col-md-2 col-xs-6">
           <select class="form-control" formControlName="flighthour">

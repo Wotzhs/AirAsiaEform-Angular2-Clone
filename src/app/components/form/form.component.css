@@ -1,4 +1,4 @@
-span{
+span:not('.glyphicon'){
   margin-left: -10px;
   color:red;
 }

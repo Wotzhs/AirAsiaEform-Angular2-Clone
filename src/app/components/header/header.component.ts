@@ -10,6 +10,6 @@ export class HeaderComponent {
   logoPath: string;
 
   constructor(){
-    this.logoPath = '../dist/logo.png';
+    this.logoPath = '../dist/assets/logo-airasia.png';
   }
 }
