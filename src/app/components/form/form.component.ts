@@ -24,6 +24,7 @@ export class FormComponent implements OnInit {
   dialCodes: any = this.formService.getDialCodes() //.map((country)=>{
   //   return '<option value="'+country.dial+'">'+country.name+' ('+country.code+')';
   // }).join("</option>").concat("</option>")
+  opened: boolean = true;
 
   constructor(
     private formService: FormService,
@@ -45,7 +46,7 @@ export class FormComponent implements OnInit {
       flightcode: ['', Validators.required],
       flightnumber: ['', Validators.required],
       flightdate: [''],
-      flighttime: [''],
+      flighttime: ['  :  '],
       flighthour: [''],
       attachment1: [''],
       attachment2: [''],
@@ -60,32 +61,34 @@ export class FormComponent implements OnInit {
         currency: [''],
         routecode: [''],
         routenumber: ['']
-      })
+      }),
+      acknowledged: ['']
     })
-    this.subscribeToCaseChanges();
+    this.subscribeToPaymentMethodChanges();
   }
 
-  subscribeToCaseChanges(){
-    const caseCategoryChanges = this.eform.controls['case'].valueChanges;
+  subscribeToPaymentMethodChanges(){
+    const paymentMethodChanges = this.eform.controls['bank']['controls']['paymentmethod'].valueChanges;
     const bankSubFields = this.eform.controls['bank']['controls'];
-    caseCategoryChanges.subscribe((change:any)=>{
-      if (change === "8" ){
+    paymentMethodChanges.subscribe((paymentMethodValue:any)=>{
+      if (paymentMethodValue === '2' || paymentMethodValue === '3'){
         Object.keys(bankSubFields).map((fieldName)=>{
-          bankSubFields[fieldName].setValidators(Validators.required)
-          bankSubFields[fieldName].updateValueAndValidity();
+          if (fieldName !== "paymentmethod"){
+            bankSubFields[fieldName].setValidators(Validators.required);
+            bankSubFields[fieldName].updateValueAndValidity();
+          }
         })
-        this.paymentMethods = this.formService.getPaymentMethods(this.preferredLanguage);
-        this.acknowledgementMesssage = this.formService.getAcknowledgementMessage(this.preferredLanguage);
-      }
-      else {
+      } else {
         Object.keys(bankSubFields).map((fieldName)=>{
-          bankSubFields[fieldName].setValidators(null)
-          bankSubFields[fieldName].updateValueAndValidity();
+          if (fieldName !== "paymentmethod"){
+            bankSubFields[fieldName].setValidators(null);
+            bankSubFields[fieldName].updateValueAndValidity();
+          }
         })
       }
+    console.log(paymentMethodValue)
     })
   }
-
   ngDoCheck(){
     this.labels = this.formService.getLabels(this.preferredLanguage);
     this.caseOptions = this.formService.getCaseOptions(this.preferredLanguage);
@@ -93,6 +96,7 @@ export class FormComponent implements OnInit {
     if (this.eform.controls['case'].value === "8"){
       this.paymentMethods = this.formService.getPaymentMethods(this.preferredLanguage);
       this.acknowledgementMesssage = this.formService.getAcknowledgementMessage(this.preferredLanguage);
+      this.eform.controls['acknowledged'].setValidators(Validators.required);
     }
   }
   haha(a:any){
@@ -110,7 +114,23 @@ export class FormComponent implements OnInit {
     this.selectedHomeCode = selected.code;
     this.eform.patchValue({homenum:selected.dial});
   }
+  setFlightDate(date:string){
+    const PARSED_DATE = new Date(date);
+    const FORMATTED_DATE = PARSED_DATE.getDate()+'-'+(PARSED_DATE.getMonth()+1)+'-'+PARSED_DATE.getFullYear();
+    this.eform.patchValue({flightdate: FORMATTED_DATE});
+  }
   fetchTypeOption(option:string){
     this.typeOptions = this.formService.getTypeOptions(this.preferredLanguage, option);
+  }
+  mutate(input:string){
+    console.log(input)
+    if (input.match(/(0|1|2|3|4|5|6|7|8|9)/)){
+      const update = this.eform.controls['flighttime'].value.replace(" ", input);
+      this.eform.patchValue({flighttime: update});
+      return false
+    } else {
+      input.replace(/\D\:\s/, " ")
+    }
+    console.log(this.eform.controls['flighttime'].value);
   }
 }
