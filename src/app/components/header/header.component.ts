@@ -7,9 +7,5 @@ import {Component} from '@angular/core';
 })
 
 export class HeaderComponent {
-  logoPath: string;
 
-  constructor(){
-    this.logoPath = '../dist/assets/logo-airasia.png';
-  }
 }
