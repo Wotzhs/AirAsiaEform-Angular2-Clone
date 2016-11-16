@@ -16,44 +16,44 @@
   </div>
 </div>
 
-<form [formGroup]="eform" (ngSubmit)="haha(eform.value)" >
+<form [formGroup]="eform" (ngSubmit)="haha(eform.value, eform.valid)">
   <div class="well">
     <div class="row form-group"> <!-- first last name input -->
       <div class="col-md-3"
         [class.has-error]="
-        (!eform.controls.firstname.valid || !eform.controls.lastname.valid) && (submitted || (eform.controls.firstname.touched || eform.controls.lastname.touched))
+        (!eform.controls.firstname.valid || !eform.controls.lastname.valid) && (submittedWithErrors || (eform.controls.firstname.touched || eform.controls.lastname.touched))
       ">
         <label for="firstlastname" class="control-label"><span>*</span> {{labels.name.main}}</label>
       </div>
       <div class="col-md-9">
-        <div class="col-md-4 col-xs-12" [class.has-error]="!eform.controls.firstname.valid && (submitted || eform.controls.firstname.touched)">
+        <div class="col-md-4 col-xs-12" [class.has-error]="!eform.controls.firstname.valid && (submittedWithErrors || eform.controls.firstname.touched)">
           <input class="form-control" type="text" formControlName="firstname">
-          <label for="firstname" *ngIf="!eform.controls.firstname.valid && (submitted || eform.controls.firstname.touched)"
+          <label for="firstname" *ngIf="!eform.controls.firstname.valid && (submittedWithErrors || eform.controls.firstname.touched)"
               class="control-label">{{labels.name.err[0]}}</label>
         </div>
-        <div class="col-md-4 col-xs-12" [class.has-error]="!eform.controls.lastname.valid && (submitted || eform.controls.lastname.touched)">
+        <div class="col-md-4 col-xs-12" [class.has-error]="!eform.controls.lastname.valid && (submittedWithErrors || eform.controls.lastname.touched)">
           <input class="form-control" type="text" formControlName="lastname">
-          <label for="lastname" *ngIf="!eform.controls.lastname.valid && (submitted || eform.controls.lastname.touched)"
+          <label for="lastname" *ngIf="!eform.controls.lastname.valid && (submittedWithErrors || eform.controls.lastname.touched)"
               class="control-label">{{labels.name.err[1]}}</label>
         </div>
       </div>
     </div> <!-- end of first last name input -->
 
-    <div class="row form-group"[class.has-error]="!eform.controls.email.valid && (submitted || eform.controls.email.touched)">
+    <div class="row form-group"[class.has-error]="!eform.controls.email.valid && (submittedWithErrors || eform.controls.email.touched)">
       <div class="col-md-3">
         <label for="email" class="control-label"><span>*</span> {{labels.email.main}}</label>
       </div>
       <div class="col-md-9">
         <div class="col-md-4 col-xs-12">
           <input class="form-control" type="email" formControlName="email">
-          <label for="email" *ngIf="!eform.controls.email.valid && (submitted || eform.controls.email.touched)"
+          <label for="email" *ngIf="!eform.controls.email.valid && (submittedWithErrors || eform.controls.email.touched)"
               class="control-label">{{labels.email.err}}</label>
         </div>
       </div>
     </div> <!-- end of email input -->
 
     <div class="row form-group"> <!-- mobile phone input -->
-      <div class="col-md-3" [class.has-error]="!eform.controls.mobilenum.valid && (submitted || eform.controls.mobilenum.touched)">
+      <div class="col-md-3" [class.has-error]="!eform.controls.mobilenum.valid && (submittedWithErrors || eform.controls.mobilenum.touched)">
         <label for="mobilenum" class="control-label"><span>*</span> {{labels.mobilenum.main}}</label>
       </div>
       <div class="col-md-9">
@@ -63,9 +63,9 @@
             <option [selected]="selectedMobileCode" disabled hidden>{{selectedMobileCode}}</option>
           </select>
         </div>
-        <div class="col-md-5 col-xs-12" [class.has-error]="!eform.controls.mobilenum.valid && (submitted || eform.controls.mobilenum.touched)">
+        <div class="col-md-5 col-xs-12" [class.has-error]="!eform.controls.mobilenum.valid && (submittedWithErrors || eform.controls.mobilenum.touched)">
           <input class="form-control" type="text" formControlName="mobilenum" [value]="this.eform.controls.mobilenum.value">
-          <label for="mobilenum" *ngIf="!eform.controls.mobilenum.valid && (submitted || eform.controls.mobilenum.touched)"
+          <label for="mobilenum" *ngIf="!eform.controls.mobilenum.valid && (submittedWithErrors || eform.controls.mobilenum.touched)"
               class="control-label">{{labels.mobilenum.err}}</label>
         </div>
       </div>
@@ -88,7 +88,7 @@
       </div>
     </div> <!-- end of home phone input -->
 
-    <div class="row form-group" [class.has-error]="!eform.controls.case.valid && (submitted || eform.controls.case.touched)"> <!-- case category input -->
+    <div class="row form-group" [class.has-error]="!eform.controls.case.valid && (submittedWithErrors || eform.controls.case.touched)"> <!-- case category input -->
       <div class="col-md-3">
         <label for="casecategory" class="control-label"><span>*</span> {{labels.casecategory.main}}</label>
       </div>
@@ -98,13 +98,13 @@
             <option disabled hidden></option>
             <option *ngFor="let caseOption of caseOptions" [value]="caseOption.value">{{caseOption.display}}</option>
           </select>
-          <label for="casecategory" *ngIf="!eform.controls.case.valid && (submitted || eform.controls.case.touched)"
+          <label for="casecategory" *ngIf="!eform.controls.case.valid && (submittedWithErrors || eform.controls.case.touched)"
               class="control-label">{{labels.casecategory.err}}</label>
         </div>
       </div>
     </div> <!-- end of case category input -->
 
-    <div class="row form-group" [class.has-error]="!eform.controls.type.valid && (submitted || eform.controls.type.touched)"> <!-- type input -->
+    <div class="row form-group" [class.has-error]="!eform.controls.type.valid && (submittedWithErrors || eform.controls.type.touched)"> <!-- type input -->
       <div class="col-md-3">
         <label for="typecategory" class="control-label"><span>*</span> {{labels.typecategory.main}}</label>
       </div>
@@ -113,7 +113,7 @@
           <select class="form-control" formControlName="type">
             <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">{{typeOption.display}}</option>
           </select>
-          <label for="casecategory" *ngIf="!eform.controls.type.valid && (submitted || eform.controls.type.touched)"
+          <label for="casecategory" *ngIf="!eform.controls.type.valid && (submittedWithErrors || eform.controls.type.touched)"
               class="control-label">{{labels.typecategory.err}}</label>
         </div>
       </div>
@@ -133,22 +133,22 @@
     <div class="row form-group" > <!-- flight number input -->
       <div class="col-md-3"
         [class.has-error]="
-        (!eform.controls.flightcode.valid || !eform.controls.flightnumber.valid) && (submitted || (eform.controls.flightcode.touched || eform.controls.flightnumber.touched))
+        (!eform.controls.flightcode.valid || !eform.controls.flightnumber.valid) && (submittedWithErrors || (eform.controls.flightcode.touched || eform.controls.flightnumber.touched))
       ">
         <label for="flightnumber" class="control-label"><span>*</span> {{labels.flightnumber.main}}</label>
       </div>
       <div class="col-md-9">
-        <div class="col-md-3 col-xs-5" [class.has-error]="!eform.controls.flightcode.valid && (submitted || eform.controls.flightcode.touched)">
+        <div class="col-md-3 col-xs-5" [class.has-error]="!eform.controls.flightcode.valid && (submittedWithErrors || eform.controls.flightcode.touched)">
           <select class="form-control" formControlName="flightcode">
             <option disabled hidden></option>
             <option *ngFor="let flightOption of flightOptions" [value]="flightOption.value">{{flightOption.display[preferredLanguage] || flightOption.display}}</option>
           </select>
-          <label for="flightcode" *ngIf="!eform.controls.flightcode.valid && (submitted || eform.controls.flightcode.touched)"
+          <label for="flightcode" *ngIf="!eform.controls.flightcode.valid && (submittedWithErrors || eform.controls.flightcode.touched)"
               class="control-label">{{labels.flightnumber.err[0]}}</label>
         </div>
-        <div class="col-md-4 col-xs-7" [class.has-error]="!eform.controls.flightnumber.valid && (submitted || eform.controls.flightnumber.touched)">
+        <div class="col-md-4 col-xs-7" [class.has-error]="!eform.controls.flightnumber.valid && (submittedWithErrors || eform.controls.flightnumber.touched)">
           <input class="form-control" type="text" formControlName="flightnumber">
-          <label for="flightnumber" *ngIf="!eform.controls.flightnumber.valid && (submitted || eform.controls.flightnumber.touched)"
+          <label for="flightnumber" *ngIf="!eform.controls.flightnumber.valid && (submittedWithErrors || eform.controls.flightnumber.touched)"
               class="control-label">{{labels.flightnumber.err[1]}}</label>
         </div>
       </div>
@@ -167,15 +167,15 @@
 
         </div>
         <div class="col-md-2 col-xs-12">
-          <input class="form-control" type="text" #time formControlName="flighttime" (input)="mutate(time.value)">
+          <input class="form-control" type="text" #time formControlName="flighttime" [textMask]="{mask: timemask, guide: false}" placeholder="e.g. 03:45">
         </div>
         <div class="col-md-2 col-xs-6">
           <select class="form-control" formControlName="flighthour">
-            <option>am</option>
-            <option>pm</option>
+            <option value="am" selected="true">am</option>
+            <option value="pm">pm</option>
           </select>
         </div>
-        <div class="col-md-2 col-xs-6">e.g. 03:45</div>
+        <!-- <div class="col-md-2 col-xs-6">e.g. 03:45</div> -->
       </div>
     </div> <!-- end of flight time input -->
 
@@ -196,14 +196,14 @@
       </div>
     </div> <!-- end of attachment input -->
 
-    <div class="row form-group" [class.has-error]="!eform.controls.feedback.valid && (submitted || eform.controls.feedback.touched)"> <!-- feedback input -->
+    <div class="row form-group" [class.has-error]="!eform.controls.feedback.valid && (submittedWithErrors || eform.controls.feedback.touched)"> <!-- feedback input -->
       <div class="col-md-3">
         <label for="feedback" class="control-label"><span>*</span> {{labels.feedback.main}}</label>
       </div>
       <div class="col-md-9">
         <div class="col-md-8 col-xs-12">
           <textarea class="form-control" formControlName="feedback" rows="5" wrap="soft"></textarea>
-          <label for="feedback" *ngIf="!eform.controls.feedback.valid && (submitted || eform.controls.feedback.touched)"
+          <label for="feedback" *ngIf="!eform.controls.feedback.valid && (submittedWithErrors || eform.controls.feedback.touched)"
               class="control-label">{{labels.feedback.err}}</label>
         </div>
       </div>
@@ -211,126 +211,249 @@
 
     <!--  -->
     <div *ngIf="this.eform.controls.case.value === '8'"> <!-- refund div wrap -->
-      <div class="row form-group" formGroupName="bank" [class.has-error]="!eform.controls.bank.controls.paymentmethod.valid && (submitted || eform.controls.bank.controls.paymentmethod.touched)">
+      <div class="row form-group" [class.has-error]="!eform.controls.paymentmethod.valid && (submittedWithErrors || eform.controls.paymentmethod.touched)">
         <div class="col-md-3">
           <label for="paymentmethod" class="control-label"><span>*</span> {{labels.paymentmethod.main}}</label>
         </div>
         <div class="col-md-9">
-          <div class="col-md-5" [class.has-error]="!eform.controls.bank.controls.paymentmethod.valid && (submitted || eform.controls.bank.controls.paymentmethod.touched)">
-            <select class="form-control" #pymtMthd formControlName="paymentmethod" (change)="haha(this.eform.controls.bank.controls.paymentmethod.value)">
+          <div class="col-md-5" [class.has-error]="!eform.controls.paymentmethod.valid && (submittedWithErrors || eform.controls.paymentmethod.touched)">
+            <select class="form-control" #pymtMthd formControlName="paymentmethod" (change)="triggerValidation(); resetCurrency()">
               <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.value" [selected]="paymentMethod.value === '1'">{{paymentMethod.display}}</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.name.valid && (submitted || eform.controls.bank.controls.name.touched)">
-        <div class="col-md-3">
-          <label class="control-label" for="bankname">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
-            {{labels.bankname.main}}
-          </label>
-        </div>
+      <div class="row form-group" *ngIf="this.eform.controls.paymentmethod.value === '1'">
+        <div class="col-md-3"></div>
         <div class="col-md-9">
-          <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="name" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="bankname" *ngIf="!eform.controls.bank.controls.name.valid && (submitted || eform.controls.bank.controls.name.touched)"
-                class="control-label">{{labels.bankname.err}}</label>
+          <div class="col-md-12 col-xs-12">
+            <p>{{labels.paymentmethod.extra}}</p>
           </div>
         </div>
       </div>
 
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.accountholdername.valid && (submitted || eform.controls.bank.controls.accountholdername.touched)">
-        <div class="col-md-3">
-          <label class="control-label" for="bankholdername">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
-            {{labels.bankholdername.main}}
-          </label>
-        </div>
-        <div class="col-md-9">
-          <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="accountholdername" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="bankname" *ngIf="!eform.controls.bank.controls.accountholdername.valid && (submitted || eform.controls.bank.controls.accountholdername.touched)"
-                class="control-label">{{labels.bankholdername.err}}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.accountnumber.valid && (submitted || eform.controls.bank.controls.accountnumber.touched)">
-        <div class="col-md-3">
-          <label class="control-label" for="bankaccountnumber">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
-            {{labels.bankaccountnumber.main}}
-          </label>
-        </div>
-        <div class="col-md-9">
-          <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="accountnumber" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="bankaccountnumber" *ngIf="!eform.controls.bank.controls.accountnumber.valid && (submitted || eform.controls.bank.controls.accountnumber.touched)"
-                class="control-label">{{labels.bankaccountnumber.err}}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.branch.valid && (submitted || eform.controls.bank.controls.branch.touched)">
-        <div class="col-md-3">
-          <label class="control-label" for="branch">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
-            {{labels.bankbranch.main}}
-          </label>
-        </div>
-        <div class="col-md-9">
-          <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="branch" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="branch" *ngIf="!eform.controls.bank.controls.branch.valid && (submitted || eform.controls.bank.controls.branch.touched)"
-                class="control-label">{{labels.bankbranch.err}}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.currency.valid && (submitted || eform.controls.bank.controls.currency.touched)">
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.currency.valid && (submittedWithErrors || eform.controls.bank.controls.currency.touched)">
         <div class="col-md-3">
           <label class="control-label" for="bankcurrency">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3'">*</span>
             {{labels.bankcurrency.main}}
           </label>
         </div>
         <div class="col-md-9">
           <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="currency" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="bankcurrency" *ngIf="!eform.controls.bank.controls.currency.valid && (submitted || eform.controls.bank.controls.currency.touched)"
+            <select class="form-control" type="text" #curr formControlName="currency" [attr.disabled]="(this.eform.controls.paymentmethod.value === '1' || this.eform.controls.paymentmethod.value === '5') ? true : null" (change)="checkIfChineseCurrency(curr.value.toLowerCase())">
+              <option disabled hidden></option>
+              <option *ngFor="let currency of currencies" [value]="currency.split(' - ')[0]">{{currency}}</option>
+            </select>
+            <label for="bankcurrency" *ngIf="!eform.controls.bank.controls.currency.valid && (submittedWithErrors || eform.controls.bank.controls.currency.touched)"
                 class="control-label">{{labels.bankcurrency.err}}</label>
           </div>
         </div>
       </div>
 
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.routecode.valid && (submitted || eform.controls.bank.controls.routecode.touched)">
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.name.valid && (submittedWithErrors || eform.controls.bank.controls.name.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankname">
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3' || this.eform.controls.paymentmethod.value === '5'">*</span>
+            {{labels.bankname.main}}
+          </label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="name" [attr.disabled]="this.eform.controls.paymentmethod.value === '1' ? true : null">
+            <label for="bankname" *ngIf="!eform.controls.bank.controls.name.valid && (submittedWithErrors || eform.controls.bank.controls.name.touched)"
+                class="control-label">{{labels.bankname.err.main}}</label>
+          </div>
+          <div class="col-md-5" formGroupName="banknonenglish" *ngIf="chineseCurrency">
+            <input class="form-control" type="text" formControlName="name" (blur)="validateNonUnicode($event.target.value, 'name')">
+            <label for="name" *ngIf="!eform.controls.banknonenglish.controls.name.valid && (submittedWithErrors || eform.controls.banknonenglish.controls.name.touched)"
+                class="control-label">{{labels.bankname.err.secondary[chineseCurrency]}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.accountholdername.valid && (submittedWithErrors || eform.controls.bank.controls.accountholdername.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankholdername">
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3' || this.eform.controls.paymentmethod.value === '5'">*</span>
+            {{labels.bankholdername.main}}
+          </label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="accountholdername" [attr.disabled]="this.eform.controls.paymentmethod.value === '1' ? true : null">
+            <label for="bankholdername" [ngSwitch]="this.eform.controls.paymentmethod.value" *ngIf="!eform.controls.bank.controls.accountholdername.valid && (submittedWithErrors || eform.controls.bank.controls.accountholdername.touched)"
+                class="control-label">
+                <label *ngSwitchCase="'5'">{{labels.bankholdername.err.wellnet}}</label>
+                <label *ngSwitchDefault>{{labels.bankholdername.err.main}}</label>
+            </label>
+          </div>
+
+          <div class="col-md-5" formGroupName="banknonenglish" *ngIf="this.eform.controls.paymentmethod.value === '5'">
+            <span>{{labels.bankholdername.err.wellnetextra}}</span>
+          </div>
+
+          <div class="col-md-5" formGroupName="banknonenglish" *ngIf="chineseCurrency">
+            <input class="form-control" type="text" formControlName="accountholdername" (blur)="validateNonUnicode($event.target.value, 'accountholdername')">
+            <label for="accountholdername" *ngIf="!eform.controls.banknonenglish.controls.accountholdername.valid && (submittedWithErrors || eform.controls.banknonenglish.controls.accountholdername.touched)"
+                class="control-label">{{labels.bankholdername.err.secondary[chineseCurrency]}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.accountnumber.valid && (submittedWithErrors || eform.controls.bank.controls.accountnumber.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="bankaccountnumber">
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3' || this.eform.controls.paymentmethod.value === '5'">*</span>
+            {{labels.bankaccountnumber.main}}
+          </label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="accountnumber" [attr.disabled]="this.eform.controls.paymentmethod.value === '1' ? true : null">
+            <label for="bankaccountnumber" *ngIf="!eform.controls.bank.controls.accountnumber.valid && (submittedWithErrors || eform.controls.bank.controls.accountnumber.touched)"
+                class="control-label">{{labels.bankaccountnumber.err}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.branch.valid && (submittedWithErrors || eform.controls.bank.controls.branch.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="branch">
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3'">*</span>
+            {{labels.bankbranch.main}}
+          </label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="branch" [attr.disabled]="(this.eform.controls.paymentmethod.value === '1' || this.eform.controls.paymentmethod.value === '5') ? true : null">
+            <label for="branch" *ngIf="!eform.controls.bank.controls.branch.valid && (submittedWithErrors || eform.controls.bank.controls.branch.touched)"
+                class="control-label">{{labels.bankbranch.err.main}}</label>
+          </div>
+          <div class="col-md-5" formGroupName="banknonenglish" *ngIf="chineseCurrency">
+            <input class="form-control" type="text" formControlName="branch" (blur)="validateNonUnicode($event.target.value, 'branch')">
+            <label for="branch" *ngIf="!eform.controls.banknonenglish.controls.branch.valid && (submittedWithErrors || eform.controls.banknonenglish.controls.branch.touched)"
+                class="control-label">{{labels.bankbranch.err.secondary[chineseCurrency]}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.province.valid && (submittedWithErrors || eform.controls.bank.controls.province.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="province">
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3'">*</span>
+            {{labels.province.main}}
+          </label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="province" [attr.disabled]="(this.eform.controls.paymentmethod.value === '1' || this.eform.controls.paymentmethod.value === '5') ? true : null">
+            <label for="province" *ngIf="!eform.controls.bank.controls.province.valid && (submittedWithErrors || eform.controls.bank.controls.province.touched)"
+                class="control-label">{{labels.province.err.main}}</label>
+          </div>
+          <div class="col-md-5" formGroupName="banknonenglish" *ngIf="chineseCurrency">
+            <input class="form-control" type="text" formControlName="province" (blur)="validateNonUnicode($event.target.value, 'province')">
+            <label for="province" *ngIf="!eform.controls.banknonenglish.controls.province.valid && (submittedWithErrors || eform.controls.banknonenglish.controls.province.touched)"
+                class="control-label">{{labels.province.err.secondary[chineseCurrency]}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.city.valid && (submittedWithErrors || eform.controls.bank.controls.city.touched)">
+        <div class="col-md-3">
+          <label class="control-label" for="city">
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3'">*</span>
+            {{labels.city.main}}
+          </label>
+        </div>
+        <div class="col-md-9">
+          <div class="col-md-5" formGroupName="bank">
+            <input class="form-control" type="text" formControlName="city" [attr.disabled]="(this.eform.controls.paymentmethod.value === '1' || this.eform.controls.paymentmethod.value === '5') ? true : null">
+            <label for="city" *ngIf="!eform.controls.bank.controls.city.valid && (submittedWithErrors || eform.controls.bank.controls.city.touched)"
+                class="control-label">{{labels.city.err.main}}</label>
+          </div>
+          <div class="col-md-5" formGroupName="banknonenglish" *ngIf="chineseCurrency">
+            <input class="form-control" type="text" formControlName="city" (blur)="validateNonUnicode($event.target.value, 'city')">
+            <label for="city" *ngIf="!eform.controls.banknonenglish.controls.city.valid && (submittedWithErrors || eform.controls.banknonenglish.controls.city.touched)"
+                class="control-label">{{labels.city.err.secondary[chineseCurrency]}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="this.eform.controls.paymentmethod.value === '5'">
+        <div class="row form-group" [class.has-error]="!eform.controls.wellnet.controls.bankcode.valid && (submittedWithErrors || eform.controls.wellnet.controls.bankcode.touched)">
+          <div class="col-md-3">
+            <label class="control-label" for="bankcode"><span>*</span> {{labels.wellnetbankcode.main}}</label>
+          </div>
+          <div class="col-md-9">
+            <div class="col-md-5" formGroupName="wellnet">
+              <input class="form-control" type="text" formControlName="bankcode">
+              <label for="city" *ngIf="!eform.controls.wellnet.controls.bankcode.valid && (submittedWithErrors || eform.controls.wellnet.controls.bankcode.touched)"
+                  class="control-label">{{labels.wellnetbankcode.err}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group" [class.has-error]="!eform.controls.wellnet.controls.branchcode.valid && (submittedWithErrors || eform.controls.wellnet.controls.branchcode.touched)">
+          <div class="col-md-3">
+            <label class="control-label" for="branchcode"><span>*</span> {{labels.wellnetbranchcode.main}}</label>
+          </div>
+          <div class="col-md-9">
+            <div class="col-md-5" formGroupName="wellnet">
+              <input class="form-control" type="text" formControlName="branchcode">
+              <label for="city" *ngIf="!eform.controls.wellnet.controls.branchcode.valid && (submittedWithErrors || eform.controls.wellnet.controls.branchcode.touched)"
+                  class="control-label">{{labels.wellnetbranchcode.err}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group" [class.has-error]="!eform.controls.wellnet.controls.accounttype.valid && (submittedWithErrors || eform.controls.wellnet.controls.accounttype.touched)">
+          <div class="col-md-3">
+            <label class="control-label" for="accounttype"><span>*</span> {{labels.wellnetaccounttype.main}}</label>
+          </div>
+          <div class="col-md-9">
+            <div class="col-md-5" formGroupName="wellnet">
+              <select class="form-control" type="text" formControlName="accounttype">
+                <option *ngFor="let wellnetOption of wellnetOptions" [value]="wellnetOption.value">{{wellnetOption.display}}</option>
+              </select>
+              <label for="city" *ngIf="!eform.controls.wellnet.controls.accounttype.valid && (submittedWithErrors || eform.controls.wellnet.controls.accounttype.touched)"
+                  class="control-label">{{labels.wellnetaccounttype.err}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.routecode.valid && (submittedWithErrors || eform.controls.bank.controls.routecode.touched)">
         <div class="col-md-3">
           <label class="control-label" for="bankroutecode">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3'">*</span>
             {{labels.bankroutecode.main}}
           </label>
         </div>
         <div class="col-md-9">
           <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="routecode" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="bankroutecode" *ngIf="!eform.controls.bank.controls.routecode.valid && (submitted || eform.controls.bank.controls.routecode.touched)"
+            <select class="form-control" type="text" formControlName="routecode" [attr.disabled]="(this.eform.controls.paymentmethod.value === '1' || this.eform.controls.paymentmethod.value === '5') ? true : null">
+              <option value="" selected="true">-</option>
+              <option *ngFor="let routingCode of routingCodes; let i = index" [value]="i+1">{{routingCode}}</option>
+            </select>
+            <label for="bankroutecode" *ngIf="!eform.controls.bank.controls.routecode.valid && (submittedWithErrors || eform.controls.bank.controls.routecode.touched)"
                 class="control-label">{{labels.bankroutecode.err}}</label>
           </div>
         </div>
       </div>
 
-      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.routenumber.valid && (submitted || eform.controls.bank.controls.routenumber.touched)">
+      <div class="row form-group" [class.has-error]="!eform.controls.bank.controls.routenumber.valid && (submittedWithErrors || eform.controls.bank.controls.routenumber.touched)">
         <div class="col-md-3">
           <label class="control-label" for="bankroutenumber">
-            <span *ngIf="this.eform.controls.bank.controls.paymentmethod.value === '2' || this.eform.controls.bank.controls.paymentmethod.value === '3'">*</span>
+            <span *ngIf="this.eform.controls.paymentmethod.value === '2' || this.eform.controls.paymentmethod.value === '3'">*</span>
             {{labels.bankroutenumber.main}}
           </label>
         </div>
         <div class="col-md-9">
           <div class="col-md-5" formGroupName="bank">
-            <input class="form-control" type="text" formControlName="routenumber" [attr.disabled]="this.eform.controls.bank.controls.paymentmethod.value === '1' ? true : null">
-            <label for="bankroutenumber" *ngIf="!eform.controls.bank.controls.routenumber.valid && (submitted || eform.controls.bank.controls.routenumber.touched)"
+            <input class="form-control" type="text" formControlName="routenumber" [attr.disabled]="(this.eform.controls.paymentmethod.value === '1' || this.eform.controls.paymentmethod.value === '5') ? true : null">
+            <label for="bankroutenumber" *ngIf="!eform.controls.bank.controls.routenumber.valid && (submittedWithErrors || eform.controls.bank.controls.routenumber.touched)"
                 class="control-label">{{labels.bankroutenumber.err}}</label>
           </div>
         </div>
@@ -340,7 +463,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <p>{{acknowledgementMesssage.message}}</p>
-            <div class="checkbox" [class.has-error]="!eform.controls.acknowledged.value && (submitted || eform.controls.acknowledged.touched)">
+            <div class="checkbox" [class.has-error]="!eform.controls.acknowledged.value && (submittedWithErrors || eform.controls.acknowledged.touched)">
               <label class="control-label" for="acknowledged">
                 <input type="checkbox" formControlName="acknowledged">
                 {{acknowledgementMesssage.check}}

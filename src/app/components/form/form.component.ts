@@ -14,17 +14,21 @@ export class FormComponent implements OnInit {
   labels: Object = this.formService.getLabels(this.preferredLanguage);
   caseOptions: Object[] = this.formService.getCaseOptions(this.preferredLanguage);
   flightOptions: Object[] = this.formService.getFlightOptions();
+  routingCodes: string[];
+  wellnetOptions: Object[];
   paymentMethods: Object[];
   acknowledgementMesssage: Object[];
+  chineseCurrency: string;
+  currencies: string[];
   eform: FormGroup;
   typeOptions: Object[] = [''];
-  submitted: boolean = false;
+  submittedWithErrors: boolean = false;
   selectedHomeCode: string = "MY";
   selectedMobileCode: string = "MY";
   dialCodes: any = this.formService.getDialCodes() //.map((country)=>{
   //   return '<option value="'+country.dial+'">'+country.name+' ('+country.code+')';
   // }).join("</option>").concat("</option>")
-  opened: boolean = true;
+  timemask = [/[0-1]/, /[1-9]/, ':', /[0-5]/, /[0-9]/];
 
   constructor(
     private formService: FormService,
@@ -46,21 +50,35 @@ export class FormComponent implements OnInit {
       flightcode: ['', Validators.required],
       flightnumber: ['', Validators.required],
       flightdate: [''],
-      flighttime: ['  :  '],
-      flighthour: [''],
+      flighttime: [''],
+      flighthour: ['am'],
       attachment1: [''],
       attachment2: [''],
       attachment3: [''],
       feedback: ['', Validators.required],
+      paymentmethod: ['1'],
       bank: this.formBuilder.group({
-        paymentmethod: ['1'],
+        currency: [''],
         name: [''],
         accountholdername: [''],
         accountnumber: [''],
         branch: [''],
-        currency: [''],
+        province: [''],
+        city: [''],
         routecode: [''],
         routenumber: ['']
+      }),
+      banknonenglish: this.formBuilder.group({
+        name: [''],
+        accountholdername: [''],
+        branch: [''],
+        province: [''],
+        city: ['']
+      }),
+      wellnet: this.formBuilder.group({
+        bankcode: [''],
+        branchcode: [''],
+        accounttype: ['']
       }),
       acknowledged: ['']
     })
@@ -68,25 +86,23 @@ export class FormComponent implements OnInit {
   }
 
   subscribeToPaymentMethodChanges(){
-    const paymentMethodChanges = this.eform.controls['bank']['controls']['paymentmethod'].valueChanges;
+    const paymentMethodChanges = this.eform.controls['paymentmethod'].valueChanges;
     const bankSubFields = this.eform.controls['bank']['controls'];
+    const wellnetSubFields = this.eform.controls['wellnet']['controls'];
     paymentMethodChanges.subscribe((paymentMethodValue:any)=>{
+      this.removeRequired(bankSubFields);
       if (paymentMethodValue === '2' || paymentMethodValue === '3'){
-        Object.keys(bankSubFields).map((fieldName)=>{
-          if (fieldName !== "paymentmethod"){
-            bankSubFields[fieldName].setValidators(Validators.required);
-            bankSubFields[fieldName].updateValueAndValidity();
-          }
-        })
+        this.setRequired(bankSubFields);
+        this.currencies = this.formService.getCurrencies();
+        this.routingCodes = this.formService.getRoutingCodes();
+      } else if (paymentMethodValue === '5') {
+        this.wellnetOptions = this.formService.getWellnetOptions(this.preferredLanguage);
+        this.setRequired(['name', 'accountholdername', 'accountnumber'], 'bank');
+        this.setRequired(wellnetSubFields);
+        this.resetField(bankSubFields, ['name', 'accountholdername', 'accountnumber']);
       } else {
-        Object.keys(bankSubFields).map((fieldName)=>{
-          if (fieldName !== "paymentmethod"){
-            bankSubFields[fieldName].setValidators(null);
-            bankSubFields[fieldName].updateValueAndValidity();
-          }
-        })
+        this.resetField(bankSubFields);
       }
-    console.log(paymentMethodValue)
     })
   }
   ngDoCheck(){
@@ -96,15 +112,13 @@ export class FormComponent implements OnInit {
     if (this.eform.controls['case'].value === "8"){
       this.paymentMethods = this.formService.getPaymentMethods(this.preferredLanguage);
       this.acknowledgementMesssage = this.formService.getAcknowledgementMessage(this.preferredLanguage);
-      this.eform.controls['acknowledged'].setValidators(Validators.required);
+      this.setRequired([this.eform.controls['acknowledged']]);
     }
   }
-  haha(a:any){
-    // alert(JSON.stringify(a))
-    console.log(a)
-    console.log(JSON.stringify(a))
-    // this.eform.patchValue({mobilenumdialcode: a.code})
-    this.submitted = true;
+  haha(eformValues:any, eformValid:boolean){
+    console.log(eformValues)
+    if (!eformValid) { return this.submittedWithErrors = true; }
+
   }
   setMobileDialInfo(selected:any){
     this.selectedMobileCode = selected.code;
@@ -115,22 +129,59 @@ export class FormComponent implements OnInit {
     this.eform.patchValue({homenum:selected.dial});
   }
   setFlightDate(date:string){
-    const PARSED_DATE = new Date(date);
-    const FORMATTED_DATE = PARSED_DATE.getDate()+'-'+(PARSED_DATE.getMonth()+1)+'-'+PARSED_DATE.getFullYear();
-    this.eform.patchValue({flightdate: FORMATTED_DATE});
+    const parsedDate = new Date(date);
+    const formattedDate = parsedDate.getDate()+'-'+(parsedDate.getMonth()+1)+'-'+parsedDate.getFullYear();
+    this.eform.patchValue({flightdate: formattedDate});
   }
   fetchTypeOption(option:string){
     this.typeOptions = this.formService.getTypeOptions(this.preferredLanguage, option);
   }
-  mutate(input:string){
-    console.log(input)
-    if (input.match(/(0|1|2|3|4|5|6|7|8|9)/)){
-      const update = this.eform.controls['flighttime'].value.replace(" ", input);
-      this.eform.patchValue({flighttime: update});
-      return false
-    } else {
-      input.replace(/\D\:\s/, " ")
+  validateNonUnicode(input:any, field:string){
+    const chineseUnicodePattern = /[\u2E80-\u2EFF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\ud840-\ud868\udc00-\udfff\ud869\udc00-\udede]/g;
+    if (input.replace(chineseUnicodePattern, "").length !== 0){
+      this.eform.controls['banknonenglish']['controls'][field].reset();
     }
-    console.log(this.eform.controls['flighttime'].value);
+  }
+  checkIfChineseCurrency(currency:string){
+    if (currency === "cny" || currency === "twd"){
+      this.chineseCurrency = currency;
+      this.setRequired(this.eform.controls['banknonenglish']['controls']);
+    } else {
+      this.chineseCurrency = '';
+      this.removeRequired(this.eform.controls['banknonenglish']['controls']);
+    }
+  }
+  resetCurrency(){
+    this.eform.controls['bank']['controls']['currency'].reset();
+    this.chineseCurrency = '';
+  }
+  triggerValidation(){
+    this.submittedWithErrors = true;
+  }
+  setRequired(fields:any, formgroup:string = ''){
+    if (fields instanceof Array && formgroup){
+      fields.map((field)=>{
+        this.eform.controls[formgroup]['controls'][field].setValidators(Validators.required);
+        this.eform.controls[formgroup]['controls'][field].updateValueAndValidity();
+      })
+    } else {
+      Object.keys(fields).map((field)=>{
+        fields[field].setValidators(Validators.required);
+        fields[field].updateValueAndValidity();
+      })
+    }
+  }
+  removeRequired(fields:Object){
+    Object.keys(fields).map((field)=>{
+      fields[field].setValidators(null);
+      fields[field].updateValueAndValidity();
+    })
+  }
+  resetField(fields:Object, exclude:string[] = ['']){
+    Object.keys(fields).map((field)=>{
+      if (exclude.indexOf(field) === -1){
+        fields[field].reset();
+      }
+    })
   }
 }

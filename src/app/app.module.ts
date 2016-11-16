@@ -9,9 +9,10 @@ import { FooterComponent} from './components/footer/footer.component';
 import { DatepickerModule} from 'ng2-bootstrap/components/datepicker';
 import { ModalModule} from 'ng2-bootstrap/components/modal';
 import { TimepickerModule} from 'ng2-bootstrap/components/timepicker'
+import { TextMaskModule} from 'angular2-text-mask';
 
 @NgModule({
-  imports: [BrowserModule, ReactiveFormsModule, DatepickerModule, ModalModule, TimepickerModule],
+  imports: [BrowserModule, ReactiveFormsModule, DatepickerModule, ModalModule, TimepickerModule, TextMaskModule],
   declarations: [AppComponent, HeaderComponent, LanguageComponent, FormComponent, FooterComponent],
   bootstrap: [ AppComponent ]
 })

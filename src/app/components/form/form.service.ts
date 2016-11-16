@@ -670,11 +670,16 @@ const LABELS: Object = {
     attachment: {main: "Attachment", err: ""},
     feedback: {main: "Feedback", err: "Please fill in feedback", extra: "Please indicate if you would like to request for a full refund (all sectors) or the affected sector only."},
     paymentmethod: {main: "Booking Payment", err: "", extra: "This refund will be made to the initial credit card account used during booking, thus the following fields can be disregarded."},
-    bankname: {main: "Bank Name", err: "Please fill in bank name"},
-    bankholdername: {main: "Bank Account Holder's Name", err: "Please fill in only alphabets (a-z) for bank account holder's name"},
-    bankaccountnumber: {main: "Bank Account Number", err: "Please fill in bank account number"},
-    bankbranch: {main: "Bank Branch", err: "Please fill in bank branch"},
     bankcurrency: {main: "Bank Currency", err: "Please select bank currency"},
+    bankname: {main: "Bank Name", err: { main: "Please fill in bank name", secondary: {cny: "Please fill in Bank name in simplified chinese", twd: "Please fill in Bank name in traditional chinese"}}},
+    bankholdername: {main: "Bank Account Holder's Name", err: { main: "Please fill in only alphabets (a-z) for bank account holder's name", secondary: {cny: "Please fill in Bank Account Holder's Name in simplified chinese", twd: "Please fill in Bank Account Holder's Name in traditional chinese"}, wellnet: "Please fill in Bank Account Holder's Name in Japanese Characters", wellnetextra: "Please provide Account Holder's Name in half-width Katakana i.e ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "Bank Account Number", err: "Please fill in bank account number"},
+    bankbranch: {main: "Bank Branch", err: { main: "Please fill in bank branch", secondary: {cny: "Please fill in Bank Branch in simplified chinese", twd: "Please fill in Bank Branch in traditional chinese"}}},
+    province: {main: "Province", err: {main: "Please fill in Province", secondary: {cny: "Please fill in Province in simplified chinese", twd: "Please fill in Province in traditional chinese"}}},
+    city: {main: "City", err: {main: "Please fill in City", secondary: {cny: "Please fill in City in simplified chinese", twd: "Please fill in City in traditional chinese"}}},
+    wellnetbankcode: { main: "Bank Code", err: "Please fill in 4-digit Bank Code" },
+    wellnetbranchcode: { main: "Branch Code", err: "Please fill in 3-digit Branch Code" },
+    wellnetaccounttype: { main: "Account Type", err: "Please select Account Type" },
     bankroutecode: {main: "International Bank Code", err: "Please select routing code"},
     bankroutenumber: {main: "International Bank Number", err: "Please fill in routing code number"},
     button: {reset: "Clear", submit: "Submit"}
@@ -692,11 +697,16 @@ const LABELS: Object = {
     attachment: {main: "첨부파일", err: ""},
     feedback: {main: "피드백", err: "피드백을 입력하세요", extra: "귀하의 환불진행을 위하여 전 구간 또는 피해 받은 구간 중 선택하여주시기 바랍니다"},
     paymentmethod: {main: "결제수단", err: "", extra: "예약하실 때 최초로 결제하신 신용카드로 카드취소 되실 예정이므로 아래의 사항들은 작성하시지 마십시오"},
-    bankname: {main: "은행명", err: "은행 이름을 입력해 주세요"},
-    bankholdername: {main: "은행 계좌 소유자 이름", err: "은행 예금주의 이름을 알파벳 (A-Z)으로 작성하십시오"},
-    bankaccountnumber: {main: "은행 계좌번호", err: "계좌번호를 입력해 주세요"},
-    bankbranch: {main: "은행 지점", err: "지점 이름을 입력해 주세요"},
     bankcurrency: {main: "은행 통화", err: "은행 통화란을 작성해 주십시오"},
+    bankname: {main: "은행명", err: { main: "은행 이름을 입력해 주세요", secondary:{cny: "은행 이름을 중국어(간체)로 입력해 주세요", twd: "은행 이름을 중국어(번체)로 입력해 주세요"}}},
+    bankholdername: {main: "은행 계좌 소유자 이름", err: { main: "은행 예금주의 이름을 알파벳 (A-Z)으로 작성하십시오", secondary:{cny: "예금주를 중국어(간체)로 입력해 주세요", twd: "예금주를 중국어(번체)로 입력해 주세요"}, wellnet: "계좌 소유자 이름을 일본어로 입력해 주세요", wellnetextra: "일본어로 계좌 소유자 이름을 기재해 주세요(예: ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "은행 계좌번호", err: "계좌번호를 입력해 주세요"},
+    bankbranch: {main: "은행 지점", err: { main: "지점 이름을 입력해 주세요", secondary:{cny: "지점 이름을 중국어(간체)로 입력해 주세요", twd: "지점 이름을 중국어(번체)로 입력해 주세요"}}},
+    province: {main: "시/도", err: {main: "시/도를 입력해 주세요", secondary: {cny: "시/도를 중국어(간체)로 입력해 주세요", twd: "시/도를 중국어(번체)로 입력해 주세요"}}},
+    city: {main: "시", err: {main: "시를 입력해 주세요", secondary: {cny: "시를 중국어(간체)로 입력해 주세요", twd: "시를 중국어(번체)로 입력해 주세요"}}},
+    wellnetbankcode: { main: "은행 코드", err: "4자리 은행 코드를 입력해 주세요" },
+    wellnetbranchcode: { main: "지점 코드", err: "3자리 지점 코드를 입력해 주세요" },
+    wellnetaccounttype: { main: "계좌 종류", err: "계좌 종류를 선택해 주세요" },
     bankroutecode: {main: "국제은행코드", err: "은행식별코드(Routing Code)를 입력해 주세요"},
     bankroutenumber: {main: "국제은행번호", err: "은행식별코드(Routing Code)번호를 입력해 주세요"},
     button: {reset: "삭제", submit: "제출"}
@@ -714,11 +724,16 @@ const LABELS: Object = {
     attachment: {main: "添付", err: ""},
     feedback: {main: "ご意見（日本語入力可", err: "ご意見を入力してください", extra: "往路・復路合わせての払い戻し、または影響の生じた路線のみの払い戻しをご希望の際は、こちらにご記入ください"},
     paymentmethod: {main: "予約時にご利用になられた支払い方法", err: "", extra: "この払い戻しは、予約時に使用された最初のクレジットカードに行われますので、以下の項目に入力する必要はありません"},
-    bankname: {main: "銀行名", err: "銀行名をご記入ください"},
-    bankholdername: {main: "口座名義人名", err: "口座所有者を英字（a-z）のみで記入してください"},
-    bankaccountnumber: {main: "銀行の口座番号", err: "銀行口座番号をご記入ください"},
-    bankbranch: {main: "銀行の支店", err: "銀行支店名をご記入ください"},
     bankcurrency: {main: "銀行通貨", err: "銀行の通貨をご記入ください"},
+    bankname: {main: "銀行名", err: { main: "銀行名をご記入ください", secondary: {cny: "簡体中国語で銀行名をお書きください", twd: "繁体中国語で銀行名をお書きください"}}},
+    bankholdername: {main: "口座名義人名", err: { main: "口座所有者を英字（a-z）のみで記入してください", secondary: {cny: "簡体中国語で銀行口座所有者名をお書きください", twd: "繁体中国語で銀行口座所有者名をお書きください"}, wellnet: "口座名義人を日本語半角カタカナでご記入ください", wellnetextra: "口座名義人を日本語半角カタカナでご記入ください。例： ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "銀行の口座番号", err: "銀行口座番号をご記入ください"},
+    bankbranch: {main: "銀行の支店", err: { main: "銀行支店名をご記入ください", secondary: {cny: "支店名を簡体中国語でご記入ください", twd: "支店名をお書きください"}}},
+    province: {main: "都道府県", err: {main: "省・州・都道府県名をお書きください", secondary: {cny: "簡体中国語で省・州・都道府県名をお書きください", twd: "繁体中国語で省・州・都道府県名をお書きください"}}},
+    city: {main: "市町村", err: {main: "市町村名をお書きください", secondary: {cny: "簡体中国語で市町村名をお書きください", twd: "繁体中国語で市町村名をお書きください"}}},
+    wellnetbankcode: { main: "銀行コード", err: "4桁の銀行コードを記入してください" },
+    wellnetbranchcode: { main: "支店コード", err: "3桁の支店コードを記入してください" },
+    wellnetaccounttype: { main: "口座種別", err: "口座種別を選択してください" },
     bankroutecode: {main: "金融機関識別コード種別", err: "ルーティングコードをご記入ください"},
     bankroutenumber: {main: "金融機関識別コード", err: "ルーティングコード番号をご記入ください"},
     button: {reset: "クリア", submit: "送信"}
@@ -736,11 +751,16 @@ const LABELS: Object = {
     attachment: {main: "Lampiran", err: ""},
     feedback: {main: "Maklum balas", err: "Sila isikan Maklum Balas", extra: "Sila nyatakan jika anda ingin untuk meminta bayaran balik sepenuhnya (semua sektor) atau sektor yang terjejas sahaja"},
     paymentmethod: {main: "Pembayaran tempahan", err: "", extra: "Bayaran ini akan dipulangkan ke akaun kad kredit asal yang digunakan semasa tempahan, jadi ruangan berikut boleh diabaikan"},
-    bankname: {main: "Nama bank", err: "Sila isikan Nama bank"},
-    bankholdername: {main: "Nama Pemegang Akaun Bank", err: "Sila isikan Nama Pemegang Akaun Bank dalam abjad (a-z) sahaja"},
-    bankaccountnumber: {main: "Nombor Akaun Bank", err: "Sila isikan Nombor Akaun Bank"},
-    bankbranch: {main: "Cawangan Bank", err: "Sila isikan Cawangan Bank"},
     bankcurrency: {main: "Mata Wang Bank", err: "Sila masukkan nilai mata wang bank"},
+    bankname: {main: "Nama bank", err: { main: "Sila isikan Nama bank", secondary: {cny: "Sila isikan nama Bank dalam Bahasa Cina ringkas", twd: "Sila isikan nama Bank dalam Bahasa Cina tradisional"}}},
+    bankholdername: {main: "Nama Pemegang Akaun Bank", err: { main: "Sila isikan Nama Pemegang Akaun Bank dalam abjad (a-z) sahaja", secondary: {cny: "Sila isikan Nama Pemegang Akaun Bank dalam Bahasa Cina ringkas", twd: "Sila isikan Nama Pemegang Akaun Bank dalam Bahasa Cina tradisional"}, wellnet: "Sila isikan Nama Pemegang Akaun Bank dalam Aksara Bahasa Jepun", wellnetextra: "Sila isikan Nama Pemegang Akaun dalam Aksara Bahasa Jepun contoh: ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "Nombor Akaun Bank", err: "Sila isikan Nombor Akaun Bank"},
+    bankbranch: {main: "Cawangan Bank", err: { main: "Sila isikan Cawangan Bank", secondary: {cny: "Sila isikan Cawangan Bank dalam Bahasa Cina ringkas", twd: "Sila isikan Cawangan Bank dalam Bahasa Cina tradisional"}}},
+    province: {main: "Negeri/Wilayah", err: {main: "Sila isikan Negeri/ Wilayah", secondary: {cny: "Sila isikan Negeri/Wilayah dalam Bahasa Cina ringkas", twd: "Sila isikan Bandar dalam Bahasa Cina tradisional"}}},
+    city: {main: "Bandar", err: {main: "Sila isikan Bandar", secondary: {cny: "Sila isikan Bandar dalam Bahasa Cina ringkas", twd: "Sila isikan Bandar dalam Bahasa Cina tradisional"}}},
+    wellnetbankcode: { main: "Kod Bank", err: "Sila isikan 4 digit Kod Bank" },
+    wellnetbranchcode: { main: "Kod Cawangan", err: "Sila isikan 3 digit Kod Cawangan" },
+    wellnetaccounttype: { main: "Jenis Akaun", err: "Sila pilih Jenis Akaun" },
     bankroutecode: {main: "Kod Perbankan Antarabangsa", err: "Sila isikan Kod Penghalaan"},
     bankroutenumber: {main: "Nombor Perbankan Antarabangsa", err: "Sila isikan Nombor Kod Penghalaan"},
     button: {reset: "Padam", submit: "Hantar"}
@@ -758,11 +778,16 @@ const LABELS: Object = {
     attachment: {main: "Lampiran", err: ""},
     feedback: {main: "Saran & Masukan", err: "Tulis Masukan", extra: "Mohon informasikan kepada kami untuk sektor penerbangan yang hendak dibatalkan dan diproses refund (semua sektor atau hanya sektor yang terkena dampak perubahan/pembatalan)"},
     paymentmethod: {main: "Pembayaran Pembelian", err: "", extra: "Pengembalian uang akan dikirimkan ke rekening kartu kredit yang Anda gunakan saat melakukan pemesanan, untuk itu kolom berikut dapat dikosongkan"},
-    bankname: {main: "Nama Bank Anda", err: "Isilah nama Bank Anda"},
-    bankholdername: {main: "Nama Pemegang Rekening Bank Anda", err: "Mohon untuk hanya mengisi abjad (a-z) untuk Nama Pemegang Rekening Bank"},
-    bankaccountnumber: {main: "Nomor Rekening Bank Anda", err: "Isilah Nomor Rekening Bank Anda"},
-    bankbranch: {main: "Nama Cabang Bank Anda", err: "Isilah Nama Cabang Bank Anda"},
     bankcurrency: {main: "Mata Uang Bank", err: "Harap isi dalam Mata Uang Bank"},
+    bankname: {main: "Nama Bank Anda", err: { main: "Isilah nama Bank Anda", secondary: {cny: "Tulis nama Bank dalam bahasa China sederhana", twd: "Tulis nama Bank dalam bahasa China tradisional"}}},
+    bankholdername: {main: "Nama Pemegang Rekening Bank Anda", err: { main: "Mohon untuk hanya mengisi abjad (a-z) untuk Nama Pemegang Rekening Bank", secondary: {cny: "Tulis Nama Pemegang Rekening Bank dalam bahasa China Sederhana", twd: "Tulis Nama Pemegang Rekening Bank dalam bahasa China Tradisional"}, wellnet: "Silahkan Masukan Nama Pemegang Rekening Bank dalam huruf Jepang", wellnetextra: "Silahkan Sertakan nama Pemegang Akun dalam huruf Jepang: ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "Nomor Rekening Bank Anda", err: "Isilah Nomor Rekening Bank Anda"},
+    bankbranch: {main: "Nama Cabang Bank Anda", err: { main: "Isilah Nama Cabang Bank Anda", secondary: {cny: "Tulis Cabang Bank dalam bahasa China Sederhana", twd: "Tulis Cabang Bank dalam bahasa China Tradisional"}}},
+    province: {main: "Provinsi", err: {main: "Tulis Provinsi", secondary: {cny: "Tulis Provinsi dalam bahasa China sederhana", twd: "Tulis Provinsi dalam bahasa China tradisional"}}},
+    city: {main: "Kota", err: {main: "Tulis Kota", secondary: {cny: "Tulis Kota dalam bahasa China sederhana", twd: "Tulis Kota dalam bahasa China tradisional"}}},
+    wellnetbankcode: { main: "Kode Bank", err: "Silahkan Masukan 4 angka Kode Bank" },
+    wellnetbranchcode: { main: "Kode Cabang", err: "Silahkan Masukan 3 angka Kode Cabang" },
+    wellnetaccounttype: { main: "Jenis Rekening", err: "Silahkan Pilih jenis Rekening" },
     bankroutecode: {main: "Kode Bank Internasional", err: "Isilah Kode Routing"},
     bankroutenumber: {main: "Nomor Bank Internasional", err: "Isilah Nomor Kode Routing"},
     button: {reset: "Kosongkan", submit: "Masukkan"}
@@ -780,11 +805,16 @@ const LABELS: Object = {
     attachment: {main: "附件", err: ""},
     feedback: {main: "回馈", err: "请填写反馈", extra: "请指出您的退款要求:- 1、 全额退款 2、 只受影响航班"},
     paymentmethod: {main: "预订付款", err: "", extra: "退款将返还到您在预订时使用的信用卡帐户，因此一下栏目可以不填"},
-    bankname: {main: "银行名称", err: "请填上银行名称"},
-    bankholdername: {main: "银行帐户开户人姓名", err: "请以罗马字母(a-z)填写银行账户持有人姓名"},
-    bankaccountnumber: {main: "银行账号", err: "请填上银行账号"},
-    bankbranch: {main: "支行", err: "请填上银行分行"},
     bankcurrency: {main: "银行货币", err: "请填入银行币种"},
+    bankname: {main: "银行名称", err: { main: "请填上银行名称", secondary: {cny: "请用简体中文填写银行名称", twd: "请用繁体中文填写银行名称"}}},
+    bankholdername: {main: "银行帐户开户人姓名", err: { main: "请以罗马字母(a-z)填写银行账户持有人姓名", secondary: {cny: "请用简体中文填写银行账户姓名", twd: "请用繁体中文填写银行账户姓名"}, wellnet: "请以一字节片假名填写银行账户持有人姓名", wellnetextra: "请以一字节片假名填写帐户持有人姓名。例： ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "银行账号", err: "请填上银行账号"},
+    bankbranch: {main: "支行", err: { main: "请填上银行分行", secondary: {cny: "请用简体中文填写支行名称", twd: "请用繁体中文填写支行名称"}}},
+    province: {main: "省份", err: {main: "请填写省份", secondary: {cny: "请用简体中文填写省份", twd: "请用繁体中文填写省份"}}},
+    city: {main: "城市", err: {main: "请填写城市", secondary: {cny: "请用简体中文填写城市", twd: "请用繁体中文填写城市"}}},
+    wellnetbankcode: { main: "银行代码", err: "请填写4位数的银行代码" },
+    wellnetbranchcode: { main: "分行代码", err: "请填写3位数的分行代码" },
+    wellnetaccounttype: { main: "帐户类型", err: "请选择帐户类型" },
     bankroutecode: {main: "银行国际汇款路径", err: "请填上路径代码"},
     bankroutenumber: {main: "开户银行国际汇款代码", err: "请填上路径代码号码"},
     button: {reset: "清除", submit: "呈交"}
@@ -802,11 +832,16 @@ const LABELS: Object = {
     attachment: {main: "附件", err: ""},
     feedback: {main: "回饋", err: "請填寫意見", extra: "請指出您的退款要求:- 1、 全額退款 2、 只受影響航班"},
     paymentmethod: {main: "訂位付款", err: "", extra: "這款項將退回至最初訂位時所使用的信用卡賬戶內，因此以下的空格可以不需填寫"},
-    bankname: {main: "銀行名稱", err: "請輸入銀行名稱"},
-    bankholdername: {main: "銀行帳戶持有人姓名", err: "請在銀行賬戶持有人欄輸入英文字母 （a-z）"},
-    bankaccountnumber: {main: "銀行帳戶號碼", err: "請輸入銀行戶口號碼"},
-    bankbranch: {main: "銀行分行", err: "請輸入銀行分行"},
     bankcurrency: {main: "銀行貨幣", err: "請輸入銀行貨幣"},
+    bankname: {main: "銀行名稱", err: { main: "請輸入銀行名稱", secondary: {cny: "請以簡體中文填寫銀行名稱", twd: "請以繁體中文填寫銀行名稱"}}},
+    bankholdername: {main: "銀行帳戶持有人姓名", err: { main: "請在銀行賬戶持有人欄輸入英文字母 （a-z）", secondary: {cny: "請以簡體中文填寫銀行帳戶持有人名稱", twd: "請以繁體中文填寫銀行帳戶持有人名稱"}, wellnet: "請以一字节片假名填寫銀行賬戶持有人姓名", wellnetextra: "請以一字节片假名填寫帳戶持有人姓名。例: ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "銀行帳戶號碼", err: "請輸入銀行戶口號碼"},
+    bankbranch: {main: "銀行分行", err: { main: "請輸入銀行分行", secondary: {cny: "請以簡體中文填寫省份", twd: "請以繁體中文填寫銀行分行"}}},
+    province: {main: "省份", err: {main: "請填寫省份", secondary: {cny: "請以簡體中文填寫省份", twd: "請以繁體中文填寫省份"}}},
+    city: {main: "城市", err: {main: "請填寫城市", secondary: {cny: "請以簡體中文填寫城市", twd: "請以繁體中文填寫城市"}}},
+    wellnetbankcode: { main: "銀行代碼", err: "請輸入4 位數銀行代碼" },
+    wellnetbranchcode: { main: "分行代碼", err: "請輸入3 位數分行代碼" },
+    wellnetaccounttype: { main: "帳戶類型", err: "請選擇賬戶類型" },
     bankroutecode: {main: "銀行國際匯款路徑", err: "請輸入匯款路線(Routing Code)"},
     bankroutenumber: {main: "開戶銀行國際匯款代碼", err: "請輸入匯款路線號碼(Routing Code Number)"},
     button: {reset: "清除", submit: "提交"}
@@ -824,16 +859,23 @@ const LABELS: Object = {
     attachment: {main: "ไฟล์แนบ", err: ""},
     feedback: {main: "ความเห็น", err: "กรุณากรอกความเห็น", extra: "กรุณาระบุ ขอคืนเงินทั้งหมด (ทุกเที่ยวบินในหมายเลขการสำรองที่นั่ง) หรือ ระบุเฉพาะเที่ยวบินที่ได้รับผลกระทบ"},
     paymentmethod: {main: "ชำระเงินผ่าน", err: "", extra: "การคืนเงินนี้เป็นการคืนเงินสำหรับบัญชีบัตรเครดิตแรกที่ใช้ระหว่างทำรายการจอง สามารถละเว้นฟิลด์ต่อไปนี้ได้"},
-    bankname: {main: "ชื่อธนาคาร", err: "โปรดกรอกชื่อธนาคาร"},
-    bankholdername: {main: "ชื่อเจ้าของบัญชีธนาคาร", err: "กรุณากรอกชื่อเจ้าของบัญชีธนาคารด้วยอักษรภาษาอังกฤษเท่านั้น"},
-    bankaccountnumber: {main: "หมายเลขบัญชีธนาคาร", err: "โปรดกรอกหมายเลขบัญชีธนาคาร"},
-    bankbranch: {main: "สาขา", err: "โปรดกรอกสาขาธนาคาร"},
     bankcurrency: {main: "สกุลเงิน", err: "กรุณาระบุสกุลเงิน"},
+    bankname: {main: "ชื่อธนาคาร", err: { main: "โปรดกรอกชื่อธนาคาร", secondary: { cny: "โปรดระบุชื่อธนาคารเป็นอักษรจีนแบบย่อ", twd: "โปรดระบุชื่อธนาคารเป็นอักษรจีนตัวเต็ม"}}},
+    bankholdername: {main: "ชื่อเจ้าของบัญชีธนาคาร", err: { main: "กรุณากรอกชื่อเจ้าของบัญชีธนาคารด้วยอักษรภาษาอังกฤษเท่านั้น", secondary: { cny: "โปรดระบุชื่อเจ้าของบัญชีธนาคารเป็นอักษรจีนแบบย่อ", twd: "โปรดระบุชื่อเจ้าของบัญชีธนาคารเป็นอักษรจีนตัวเต็ม"}, wellnet: "กรุณาระบุชื่อเจ้าของบัญชีด้วยตัวอักษรภาษาญี่ปุ่น", wellnetextra: "กรุณาระบุชื่อเจ้าของบัญชีด้วยตัวอักษรภาษาญี่ปุ่น เช่น ｽｽﾞｷﾀﾛｳ"}},
+    bankaccountnumber: {main: "หมายเลขบัญชีธนาคาร", err: "โปรดกรอกหมายเลขบัญชีธนาคาร"},
+    bankbranch: {main: "สาขา", err: { main: "โปรดกรอกสาขาธนาคาร", secondary: { cny: "โปรดระบุสาขาธนาคารเป็นอักษรจีนแบบย่อ", twd: "โปรดระบุสาขาธนาคารเป็นอักษรจีนตัวเต็ม"}}},
+    province: {main: "จังหวัด", err: {main: "โปรดระบุจังหวัด", secondary: {cny: "โปรดระบุจังหวัดเป็นอักษรจีนแบบย่อ", twd: "โปรดระบุจังหวัดเป็นอักษรจีนตัวเต็ม"}}},
+    city: {main: "อำเภอ/ เขต​", err: {main: "โปรดระบุอำเภอ/เขต", secondary: {cny: "โปรดระบุอำเภอ/เขตเป็นอักษรจีนแบบย่อ", twd: "โปรดระบุอำเภอ/เขตเป็นอักษรจีนตัวเต็ม"}}},
+    wellnetbankcode: { main: "รหัสธนาคาร", err: "กรุณากรอกเลขรหัสธนาคาร 4 หลัก" },
+    wellnetbranchcode: { main: "รหัสสาขา", err: "กรุณากรอกเลขรหัสสาขาธนาคาร 3 หลัก" },
+    wellnetaccounttype: { main: "ประเภทบัญชี", err: "กรุณาเลือกประเภทบัญชี" },
     bankroutecode: {main: "International Bank Code", err: "โปรดกรอกรหัสการโอน"},
     bankroutenumber: {main: "International Bank Number", err: "โปรดกรอกหมายเลขรหัสการโอน"},
     button: {reset: "เคลียร์ข้อมูล", submit: "ส่ง"}
   },
 }
+
+const CURRENCIES = [ 'AED - UAE Dirham', 'AFN - Afghanistan Afghani', 'ALL - Albania Lek', 'AMD - Armenia Dram', 'ANG - Netherlands Antilles Guilder','AOA - Angola Kwanza','ARS - Argentina Peso','AUD - Australian Dollar','AWG - Aruban Florin','AZN - Azerbaijani Manat','BAM - Bosnian Convertible Mark','BBD - Barbados Dollar','BDT - Bangladesh Taka','BGN - Bulgaria Lev','BHD - Bahraini Dinar','BIF - Burundi Franc','BMD - Bermudian Dollar','BND - Brunei Dollar','BOB - Bolivian Boliviano','BRL - Brazilian Real', 'BSD - Bahamian Dollar', 'BTN - Bhutan Ngultrum', 'BWP - Botswana Pula', 'BYR - Belarussian Rouble', 'BZD - Belize Dollar', 'CAD - Canadian Dollar', 'CDF - Congo Dem. Rep. Franc', 'CHF - Swiss Franc', 'CLP - Chilean Peso', 'CNY - Chinese Renminbi Yuan', 'COP - Colombian Peso', 'COU - Unidad de Valor Real', 'CRC - Costa Rican Colón', 'CUC - Cuban convertible peso', 'CUP - Cuban Peso', 'CVE - Escudo Caboverdiano', 'CZK - Czech Koruna', 'DJF - Djibouti Franc', 'DKK - Danish Krone', 'DOP - Dominican Republic Peso', 'DZD - Algerian Dinar', 'EEK - Estonia Kroon', 'EGP - Egytian Pound', 'ERN - Eritrea Nakfa', 'ETB - Ethiopia Birr', 'EUR - Euro', 'FJD - Fiji Dollar', 'FKP - Falkland Pound', 'GBP - Sterling', 'GEL - Georgia Lari', 'GHS - Ghana Cedi', 'GIP - Gibraltar Pound', 'GMD - Gambia Dalasi', 'GNF - Guinea Franc', 'GTQ - Guatemala Quetzal', 'GYD - Guyana Dollar', 'HKD - Hong Kong Dollar', 'HNL - Honduras Lempira', 'HRK - Croatia Kuna', 'HTG - Haiti Gourde', 'HUF - Hungary Forint', 'IDR - Indonesia Rupiah', 'ILS - Israel Shekel', 'INR - Indian Rupee', 'IQD - Iraqi Dinar', 'IRR - Iranian Riyal', 'ISK - Icelandic Króna', 'JMD - Jamaican Dollar', 'JOD - Jordanian Dinar', 'JPY - Japanese Yen', 'KES - Kenyan Shilling', 'KGS - Kyrgyzstan Som', 'KHR - Cambodia Riel', 'KMF - Comorian Franc', 'KPW - North Korean Won', 'KRW - South Korean Won', 'KWD - Kuwaiti Dinar', 'KYD - Cayman Islands Dollar', 'KZT - Kazakhstan Tenge', 'LAK - Laos Kip', 'LBP - Lebanese Pound', 'LKR - Sri Lankan Rupee', 'LRD - Liberian Dollar', 'LSL - Lesotho Maloti', 'LTL - Lithuania Litas', 'LVL - Latvia Lat', 'LYD - Libyan Dinar', 'MAD - Moroccan Dirham', 'MDL - Moldovian Leu', 'MGA - Malagasy ariary', 'MKD - Macedonian Denar', 'MMK - Myanmar Kyat', 'MNT - Mongolia Tugrik', 'MOP - Macao Pataca', 'MRO - Mauritania Ouguiya', 'MUR - Mauritius Rupee', 'MVR - Maldives Rufiyaa', 'MWK - Malawian Kwacha', 'MXN - Mexican Peso', 'MYR - Malaysian Ringgit', 'MZN - Mozambique Metical', 'NAD - Namibian Dollar', 'NGN - Nigeria Naira', 'NIO - Nicaragua Córdoba', 'NOK - Norwegian Krone', 'NPR - Nepalese Rupee', 'NZD - New Zealand Dollar', 'OMR - Riyal Omani', 'PAB - Panama Balboa', 'PEN - Peru New Sol', 'PGK - Papua New Guinea Kina', 'PHP - Philippine Peso', 'PKR - Pakistani Rupee', 'PLN - Poland New Zloty', 'PYG - Paraguay Guarani', 'QAR - Qatari Riyal', 'RON - Romanian new leu', 'RSD - Serbian dinar', 'RUB - Russian Ruble', 'RWF - Rwanda Franc', 'SAR - Saudi Riyal', 'SBD - Solomon Islands Dollar', 'SCR - Seychelles Rupee', 'SDG - Sudanese pound', 'SEK - Swedish Krona', 'SGD - Singapore Dollar', 'SHP - St Helena Pound', 'SLL - Sierra Leone Leone', 'SOS - Somali Shilling', 'STD - São Tomé & Príncipe Dobra', 'SYP - Syrian Pound', 'SZL - Swaziland Lilangeni', 'THB - Thailand Baht', 'TJS - Tajikistan Somoni', 'TMT - Turkmenistan Manat', 'TND - Tunisia Tunisian Dinar', 'TOP - Tongan Pa\'anga', 'TRY - Turkish Lira', 'TTD - Trinidad & Tobago Dollar', 'TWD - Taiwanese NT Dollar', 'TZS - Tanzanian Shilling', 'UAH - Ukraine Hryvna', 'UGX - Ugandian Shilling', 'USD - US Dollar', 'UYU - Uruguayan Peso', 'UZS - Uzbekistani Sum', 'VEF - Venezuelan bolívar fuerte', 'VND - Vietnam Dong', 'VUV - Vanuatu Vatu', 'WST - Western Samoa Tala', 'XAF - Franc de la Communaut financi', 'XCD - East Caribbean Dollar', 'XPF - CFP Franc', 'XXX - No currency', 'YER - Yemen Riyal', 'ZAR - South African Rand', 'ZMK - Zambian Kwacha', 'ZWL - Zimbabwe Dolla', 'SDR - SDR Currency' ]
 
 const PAYMENY_METHODS: Object = {
   "en-gb": [ {value:"1", display:"Credit Card"}, {value:"3", display:"Cash"}, {value:"2", display:"Bank/Direct Debit"}, {value:"5", display:"Wellnet"} ],
@@ -857,6 +899,19 @@ const ACKNOWLEDGEMENT_MESSAGE: Object = {
   "th-th": {message: "*การคืนเงินขึ้นอยู่กับดุลพินิจของสายการบินแอร์เอเชีย โปรดตรวจสอบหมายเลขบัญชีธนาคารต้องเป็นของผู้โดยสารที่มีชื่ออยู่ในหมายเลขการสำรองที่นั่ง หรือผู้ที่ดำเนินการสำรองที่นั่งเท่านั้น", check: "ข้าพเจ้ายอมรับว่าข้อมูลที่ให้ไว้ถูกต้อง และยินยอมให้สายการบินแอร์เอเชียดำเนินการคืนเงินเข้าหมายเลขบัญชีธนาคารที่ได้ระบุไว้"}
 }
 
+const WELLNET_ACCOUNT_TYPE: Object = {
+  "en-gb": [{value: "1", display: "Saving"}, {value: "2", display: "Checking"}],
+  "ko-kr": [{value: "1", display: "예금 계좌번호"}, {value: "2", display: "당좌 계좌번호"}],
+  "ja-jp": [{value: "1", display: "普通預金"}, {value: "2", display: "当座預金"}],
+  "ms-my": [{value: "1", display: "Simpanan"}, {value: "2", display: "Semasa"}],
+  "id-id": [{value: "1", display: "Tabungan"}, {value: "2", display: "Memeriksa"}],
+  "zh-cn": [{value: "1", display: "储蓄账户"}, {value: "2", display: "支票账户"}],
+  "zh-hk": [{value: "1", display: "儲存户口"}, {value: "2", display: "支票帳戶"}],
+  "th-th": [{value: "1", display: "บัญชีออมทรัพย์"}, {value: "2", display: "บัญชีรองรับการจ่ายเช็คหรือบัตรเดบิต"}],
+}
+
+const ROUTING_CODES: string[] = ['SWIFT', 'BIC Code', 'ABA', 'Routing No', 'Sort Code','BSB', 'IBAN', 'IFSC']
+
 @Injectable()
 export class FormService {
   getLabels(language:string){
@@ -879,5 +934,14 @@ export class FormService {
   }
   getAcknowledgementMessage(language:string){
     return ACKNOWLEDGEMENT_MESSAGE[language];
+  }
+  getCurrencies(){
+    return CURRENCIES;
+  }
+  getWellnetOptions(language:string){
+    return WELLNET_ACCOUNT_TYPE[language];
+  }
+  getRoutingCodes(){
+    return ROUTING_CODES;
   }
 }

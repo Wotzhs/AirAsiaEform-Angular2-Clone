@@ -1,4 +1,4 @@
-span:not('.glyphicon'){
+label > span{
   margin-left: -10px;
   color:red;
 }
