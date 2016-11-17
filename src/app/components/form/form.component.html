@@ -16,6 +16,34 @@
   </div>
 </div>
 
+<!-- refund-extra-info modal -->
+<div class="modal fade" bsModal #refundModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content" *ngIf="refund">
+      <div class="modal-body">
+        <b><u>{{refund.popup.title}}</u></b>
+        <br>
+        <br>
+        {{refund.popup.main}}
+        <ul *ngIf="refund.popup.list.join() !== ''">
+          <li *ngFor="let list of refund.popup.list">{{list.main}}
+            <ul *ngIf="list.secondary && list.secondary.join() !== ''">
+              <li *ngFor="let subList of list.secondary">{{subList}}</li>
+            </ul>
+          </li>
+        </ul>
+        {{refund.popup.extra}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close" aria-label="Close" (click)="refundModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <form [formGroup]="eform" (ngSubmit)="haha(eform.value, eform.valid)">
   <div class="well">
     <div class="row form-group"> <!-- first last name input -->
@@ -104,20 +132,20 @@
       </div>
     </div> <!-- end of case category input -->
 
-    <div class="row form-group" [class.has-error]="!eform.controls.type.valid && (submittedWithErrors || eform.controls.type.touched)"> <!-- type input -->
+    <div class="row form-group" [class.has-error]="!eform.controls.type.valid && (submittedWithErrors || eform.controls.type.touched)"> <!-- type select -->
       <div class="col-md-3">
         <label for="typecategory" class="control-label"><span>*</span> {{labels.typecategory.main}}</label>
       </div>
       <div class="col-md-9">
         <div class="col-md-5 col-xs-12">
-          <select class="form-control" formControlName="type">
+          <select class="form-control" formControlName="type" (change)="bindType($event.target.value); case.value === '8' ? refundModal.show() : null">
             <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">{{typeOption.display}}</option>
           </select>
           <label for="casecategory" *ngIf="!eform.controls.type.valid && (submittedWithErrors || eform.controls.type.touched)"
               class="control-label">{{labels.typecategory.err}}</label>
         </div>
       </div>
-    </div> <!-- end of type input -->
+    </div> <!-- end of type select -->
 
     <div class="row form-group"> <!-- booking number input -->
       <div class="col-md-3">

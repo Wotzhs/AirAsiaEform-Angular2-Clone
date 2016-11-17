@@ -313,12 +313,88 @@ const TYPE_OPTIONS: Object = {
       {display: "Refund Request", value: "86"},
     ],
     8: [
-      {display: "Airport Tax", value: "245"},
-      {display: "Double Payment", value: "250"},
-      {display: "Duplicate Booking", value: "249"},
-      {display: "Duty Free", value: "109"},
-      {display: "Flight Cancellation", value: "511"},
-      {display: "Flight Reschedule", value: "513"}
+      {
+        display: "Airport Tax",
+        value: "245",
+        popup: {
+          title: "Airport Tax",
+          main: "All refund requests must meet the following criterias:",
+          list: [
+            { main: "Must be submitted within six (6) months after your flight(s) have departed.", secondary: [""] },
+            { main: "One (1) or more guests did not board the flight(s)", secondary: [""] },
+            { main: "Refund requests back to original payment mode are subject to refund fee (per guest per sector) where applicable.", secondary: "" },
+            {
+              main: "Refund fee will be exempted for:",
+              secondary: [
+              "All AirAsia Thailand (FD), AirAsia X Thailand (XJ) & AirAsia India (I5) flights.",
+              "All flights departing from Thailand.",
+              "All flights departing from Hong Kong."
+              ]
+            },
+          ],
+          extra: "Note: Guests who did not board their flight departing from Manila Philippines can request for International Passenger Service Charge refund, within one (1) year from the booking date. Refund fee will be exempted."
+        }
+      },
+      {
+        display: "Double Payment",
+        value: "250",
+        popup: {
+          title: "Double Payment",
+          main: "Refund requests can be submitted if you have been charged more than once for the same booking number (e.g. credit card charged twice). Approved refund requests for the double charged amount will be refunded back to the original mode of payment based on the second or subsequent transactions.",
+          list: [""],
+          extra: ""
+        }
+      },
+      {
+        display: "Duplicate Booking",
+        value: "249",
+        popup: {
+          title: "Duplicate Booking",
+          main: "All refund requests must meet the following criterias:",
+          list: [
+            { main: "Both bookings must be for the same date(s). flight sector(s) and destinations (origin and destination)", secondary: [""] },
+            { main: "Both bookings must have the same guest name list", secondary: [""] },
+            { main: "Must be submitted before the departure date of your flight.", secondary: [""]}
+          ],
+          extra: "Kindly note that we will maintain your first booking (based on the creation date and time) as a confirmed booking. Any approved refund requests will be processed for the 2nd or subsequent booking(s)."
+        }
+      },
+      {
+        display: "Duty Free",
+        value: "109",
+        popup: {
+          title: "Duty Free",
+          main: "Refunds for duty free purchases are only applicable for:",
+          list: [
+            { main: "Defective items", secondary: [""] },
+            { main: "Lowest Price Guarantee (where you match your purchase with a lower price)", secondary: [""] },
+            { main: "Flight cancellations *", secondary: [""] },
+            { main: "Missed flights *", secondary: [""] },
+            { main: "Order cancellations *", secondary: [""]}
+          ],
+          extra: "* For pre-booked duty free purchases only"
+        }
+      },
+      {
+        display: "Flight Cancellation",
+        value: "511",
+        popup: {
+          title: "Flight Cancellation",
+          main: "Refund requests can only be submitted if the flight was a scheduled cancellation by AirAsia.",
+          list: [""],
+          extra: ""
+        }
+      },
+      {
+        display: "Flight Reschedule",
+        value: "513",
+        popup: {
+          title: "Flight Reschedule",
+          main: "Refund requests can only be submitted if flight was re-timed more than 3 hours from the original scheduled departure time.",
+          list: [""],
+          extra: ""
+        }
+      }
     ]
   },
   "ko-kr": {
@@ -359,12 +435,88 @@ const TYPE_OPTIONS: Object = {
       {display: "환불 요청", value: "86"},
     ],
     8: [
-      {display: "공항세", value: "245"},
-      {display: "이중 결제", value: "250"},
-      {display: "중복예약", value: "249"},
-      {display: "면세", value: "109"},
-      {display: "결항편", value: "511"},
-      {display: "출발시각변경편", value: "513"}
+      {
+        display: "공항세",
+        value: "245",
+        popup: {
+           title: "공항세 환불",
+           main: "모든 환불 요청들은 아래의 모든 기준을 충족시키셔야 함",
+           list: [
+             { main: "비행 출발일 기준 6개월 이내로 환불 요청이 제출되어야 함", secondary: [""]},
+             { main: "한 명 또는 그 이상의 미탑승 승객이 있는 경우", secondary: [""]},
+             { main: "환불 수수료는 이용하신 결제수단으로 환불 처리가 가능함(한 구간의 승객 한 명)", secondary: [""]},
+             {
+               main: "아래의 비행 편들의 환불 수수료는 제외 됨",
+               secondary: [
+                 "모든 AirAsia Thailand (FD), AirAsia X Thailand (XJ) & AirAsia India (I5) 비행 편들",
+                 "모든 태국 출발 비행 편들",
+                 "모든 홍콩 출발 비행 편들"
+               ]
+             }
+           ],
+           extra: "알림: 필리핀 마닐라 출발 비행 편의 미탑승으로 인한 국제여객 수송 요금 환불 처리는 예약일로부터 1년 이내에 환불 처리가 가능합니다"
+         }
+       },
+      {
+        display: "이중 결제",
+        value: "250",
+        popup: {
+           title: "중복 결제",
+           main: "동일한 예약번호가 한 번 이상 결제가 된 경우에 환불 요청이 가능합니다(ex. 신용카드가 두 번 결제된 경우). 두 번째 또는 이후에 결제된 중복된 금액의 환불은 이용하신 결제수단으로 환불 처리가 됩니다",
+           list: [""],
+           extra: ""
+         }
+       },
+      {
+        display: "중복예약",
+        value: "249",
+        popup: {
+           title: "중복 예약",
+           main: "모든 환불 요청들은 아래의 모든 기준을 충족시키셔야 함:",
+           list: [
+             { main: "모든 예약들은 동일한 날짜여야 함. 비행 구간 그리고 목적지(출발지 그리고 도착지) 포함", secondary: [""]},
+             { main: "모든 예약들에는 동일한 탑승객으로 구성되어 있어야 함", secondary: [""]},
+             { main: "반드시 출발일 전에 환불 요청을 해야만 함", secondary: [""]},
+           ],
+           extra: "당사는 확약된 첫 번째 예약(예약이 생성된 그리고 시간 기준)을 유지할 것이며, 두 번째 또는 이후에 생성된 예약이 환불 처리됨을 알려드립니다"
+         }
+       },
+      {
+        display: "면세",
+        value: "109",
+        popup: {
+           title: "면세",
+           main: "구매한 면세품 환불은 다음 경우에만 해당됩니다",
+           list: [
+             { main: "제품 불량", secondary: [""]},
+             { main: "최저가 보장(최저가가 아닌 경우)", secondary: [""]},
+             { main: "항공편 취소 *", secondary: [""]},
+             { main: "항공편에 탑승하지 못함 *", secondary: [""]},
+             { main: "주문 취소 *", secondary: [""]}
+           ],
+           extra: "* 사전 예약한 면세품 구매만 해당"
+         }
+       },
+      {
+        display: "결항편",
+        value: "511",
+        popup: {
+           title: "항공기 결항",
+           main: "에어아시아로부터 예정된 결항 편에 한해 환불 신청이 가능함.",
+           list: [""],
+           extra: ""
+         }
+       },
+      {
+        display: "출발시각변경편",
+        value: "513",
+        popup: {
+           title: "항공기 일정 변경",
+           main: "예정된 출발시각으로부터 비행편이 3시간 이상 일정 변경된 경우 환불 처리가 가능함",
+           list: [""],
+           extra: ""
+         }
+       }
     ]
   },
   "ja-jp": {
@@ -405,12 +557,75 @@ const TYPE_OPTIONS: Object = {
       {display: "払い戻しのリクエスト", value: "86"},
     ],
     8: [
-      {display: "空港税", value: "245"},
-      {display: "二重支払い", value: "250"},
-      {display: "重複予約", value: "249"},
-      {display: "免税品", value: "109"},
-      {display: "欠航便", value: "511"},
-      {display: "出発時刻変更便", value: "513"}
+      {
+        display: "空港税", value: "245",
+        popup: {
+          title: "空港税について",
+          main: "空港税の返金申請は、下記の要件を満たしている必要がございます",
+          list: [
+            {main: "該当する便が出発してから６ヶ月以内に申請されること", secondary: [""]},
+            {main: "予約に対し、搭乗していないお客様が１名、またはそれ以上であること", secondary: [""]},
+            {main: "返金にあたり、お客様1名様あたり・また1区間あたりに返金手数料を差し引いた額をお支払いいただいた先に返金させていただきます", secondary: [""]},
+            {main: "下記要件に該当する場合、返金手数料は発生致しません", secondary: [
+              "タイ・エアアジア（FD）、タイ・エアアジアXタイ（XJ）、エアアジア・インディア（I５）の全ての便",
+              "タイから出発する、全ての便",
+              "香港から出発する、全ての便"
+            ]},
+          ],
+          extra: "追記：フィリピン・マニラ(ニノイ・アキノ国際空港)出発の便にて搭乗されなかったお客様は、予約日から１年以内であれば、国際線旅客サービス料(International Passenger Service Charge) の返金申請が可能です。※返金手数料は発生いたしません"
+        }
+      },
+      {
+        display: "二重支払い", value: "250",
+        popup: {
+          title: "重複支払いについて",
+          main: "同一の予約番号に対し複数のお支払いが行われた場合は、返金申請が可能です（例：クレジットカードでの重複支払い）。承認された重複支払いの返金申請は、お支払い頂いた方法に基づき処理がなされます",
+          list: [],
+          extra: ""
+        }
+      },
+      {
+        display: "重複予約", value: "249",
+        popup: {
+          title: "",
+          main: "",
+          list: [],
+          extra: ""
+        }
+      },
+      {
+        display: "免税品", value: "109",
+        popup: {
+          title: "免税品",
+          main: "免税品購入の払い戻しは以下に限られます",
+          list: [
+            { main: "欠陥品", secondary: ""},
+            { main: "最安値保証 (安い方の価格で購入)", secondary: ""},
+            { main: "欠航 *", secondary: ""},
+            { main: "乗り遅れ *", secondary: ""},
+            { main: "オーダー取り消し *", secondary: ""}
+          ],
+          extra: "* 事前予約の免税品購入のみ"
+        }
+      },
+      {
+        display: "欠航便", value: "511",
+        popup: {
+          title: "欠航便について",
+          main: "エアアジアに起因する原因の欠航便においてのみ、返金申請が可能です",
+          list: [],
+          extra: ""
+        }
+      },
+      {
+        display: "出発時刻変更便", value: "513",
+        popup: {
+          title: "便の変更について",
+          main: "本来の予約上の予定出発時間から３時間を越えた便の時刻変更が発生した場合のみ、返金申請が可能です",
+          list: [],
+          extra: ""
+        }
+      }
     ]
   },
   "ms-my": {
@@ -451,12 +666,88 @@ const TYPE_OPTIONS: Object = {
       {display: "Permohonan bayaran balik", value: "86"},
     ],
     8: [
-      {display: "Cukai lapangan terbang", value: "245"},
-      {display: "Pembayaran dua kali", value: "250"},
-      {display: "Tempahan Berganda", value: "249"},
-      {display: "Barang Bebas Cukai", value: "109"},
-      {display: "Pembatalan Penerbangan", value: "511"},
-      {display: "Perubahan Jadual Penerbangan", value: "513"}
+      {
+        display: "Cukai lapangan terbang",
+        value: "245",
+        popup: {
+          title: "Cukai Lapangan Terbang",
+          main: "Semua permintaan pemulangan bayaran haruslah memenuhi kriteria berikut:",
+          list: [
+            { main: "Haruslah dikemukakan dalam tempoh enam (6) bulan selepas tarikh penerbangan", secondary: []},
+            { main: "Satu (1) atau lebih penumpang tidak menaiki penerbangan", secondary: []},
+            { main: "Permintaan pemulangan bayaran ke mod pembayaran asal adalah tertakluk kepada yuran bayaran balik (setiap penumpang bagi setiap sektor) yang berkenaan", secondary: []},
+            {
+              main: "Yuran bayaran balik akan dikecualikan bagi:",
+              secondary: [
+                "Semua penerbangan AirAsia Thailand (FD), AirAsia X Thailand (XJ) & AirAsia India (I5)",
+                "Semua penerbangan yang berlepas dari Thailand",
+                "Semua penerbangan yang berlepas dari Hong Kong"
+              ]
+            }
+          ],
+          extra: "Nota: Para penumpang yang tidak menaiki penerbangan mereka berlepas dari Manila, Filipina boleh meminta bayaran balik Caj Perkhidmatan Penumpang Antarabangsa, dalam tempoh satu (1) tahun dari tarikh tempahan. Caj bayaran balik tidak akan dikenakan"
+        }
+      },
+      {
+        display: "Pembayaran dua kali",
+        value:"250",
+        popup: {
+          title: "Pembayaran Berganda",
+          main: "Permintaan bayaran balik boleh dikemukakan jika anda telah dikenakan bayaran lebih daripada sekali bagi nombor tempahan yang sama (contohnya kad kredit anda dicaj dua kali). Permintaan bayaran balik yang diluluskan untuk jumlah berganda yang dikenakan akan dikembalikan semula ke mod asal pembayaran berdasarkan transaksi kedua atau yang berikutnya",
+          list: [],
+          extra: ""
+        }
+      },
+      {
+        display: "Tempahan Berganda",
+        value: "249",
+        popup: {
+          title: "Tempahan Berganda",
+          main: "Semua permintaan bayaran balik haruslah memenuhi kriteria berikut:",
+          list: [
+            { main: "Kedua-dua tempahan haruslah untuk tarikh, sektor penerbangan dan destinasi (lapangan terbang berlepas dan ketibaan) yang sama", secondary: []},
+            { main: "Kedua-dua tempahan haruslah mempunyai senarai nama penumpang yang sama", secondary: []},
+            { main: "Mesti dikemukakan sebelum tarikh berlepas untuk penerbangan anda", secondary: []}
+          ],
+          extra: "Sila ambil perhatian bahawa kami akan mengekalkan tempahan pertama anda (berdasarkan tarikh dan masa tempahan dibuat) sebagai tempahan yang sah. Sebarang permintaan pembayaran balik yang diluluskan akan diproses untuk tempahan kedua atau berikutnya"
+        }
+      },
+      {
+        display: "Barang Bebas Cukai",
+        value: "109",
+        popup: {
+          title: "Barang Bebas Cukai",
+          main: "Bayaran balik pembelian bebas cukai hanya digunakan untuk:",
+          list: [
+            { main: "Barangan rosak", secondary: []},
+            { main: "Jaminan Harga Terendah (di mana kamu dapat memadankan pembelian anda dengan harga yang lebih rendah)", secondary: []},
+            { main: "Pembatalan penerbangan *", secondary: []},
+            { main: "Penerbangan terlepas *", secondary: []},
+            { main: "Pembatalan tempahan *", secondary: []},
+          ],
+          extra: "* Untuk pembelian bebas cukai pra-tempahan sahaja"
+        }
+      },
+      {
+        display: "Pembatalan Penerbangan",
+        value: "511",
+        popup: {
+          title: "Pembatalan penerbangan",
+          main: "Permintaan bayaran balik hanya boleh dikemukakan jika jadual penerbangan telah dibatalkan oleh AirAsia",
+          list: [],
+          extra: ""
+        }
+      },
+      {
+        display: "Perubahan Jadual Penerbangan",
+        value: "513",
+        popup: {
+          title: "Perubahan Jadual Penerbangan",
+          main: "Permintaan bayaran balik hanya boleh dikemukakan jika jadual penerbangan mengalami perubahan lebih dari 3 jam dari jadual perlepasan asal",
+          list: [],
+          extra: ""
+        }
+      }
     ]
   },
   "id-id": {
@@ -497,12 +788,88 @@ const TYPE_OPTIONS: Object = {
       {display: "Permintaan refund", value: "86"},
     ],
     8: [
-      {display: "Pajak bandara", value: "245"},
-      {display: "Pembayaran Ganda", value: "250"},
-      {display: "Pemesanan Ganda", value: "249"},
-      {display: "Bebas pajak", value: "109"},
-      {display: "Penerbangan dibatalkan", value: "511"},
-      {display: "Penerbangan Berubah Jadwal", value: "513"}
+      {
+        display: "Pajak Bandara",
+        value: "245",
+        popup: {
+          title: "Pajak Bandara",
+          main: "Untuk semua permintaan yang diajukan harus memenuhi kriteria berikut dibawah ini:",
+          list: [
+            { main: "Diajukan dalam kurun waktu tidak lebih 6 (enam) bulan setelah tanggal keberangkatan", secondary: []},
+            { main: "Penumpang yang bersangkutan tidak mengikuti penerbangan tersebut", secondary: []},
+            { main: "Proses pengembalian biaya (refund) yang diajukan akan dikembalikan ke akun pembayaran semula dan akan dikenakan biaya refund (per orang per sektor)", secondary: []},
+            {
+              main: "Biaya refund tidak akan dikenakan untuk penerbangan dibawah ini:",
+              secondary: [
+                "Semua penerbangan AirAsia Thailand (FD), AirAsia X Thailand (XJ) dan AirAsia India (I5)",
+                "Semua penerbangan yang berangkat dari Thailand",
+                "Semua penerbangan yang berangkat dari Hongkong"
+              ]
+            }
+          ],
+          extra: "Catatan: Untuk penumpang yang tidak dapat mengikuti penerbangan dari Manila Filipina, International Passenger Service Charge (LI) dapat mengajukan permintaan pengembalian biaya tersebut dalam kurun waktu 1 (satu) tahun setelah tanggal pembelian tanpa dikenakan biaya"
+        }
+      },
+      {
+        display: "Pembayaran Ganda",
+        value: "250",
+        popup: {
+          title: "Pembayaran Ganda",
+          main:"Permintaan pengembalian biaya hanya dapat diajukan apabila terdapat lebih dari 1 (satu) pembayaran yang sama untuk pemesanan penerbangan anda (misalnya: pembayaran ganda dengan menggunakan kartu kredit yang sama).Pengajuan pengembalian biaya yang disetujui akan diproses ke akun pembayaran semula berdasarkan pada transaksi kedua atau berikutnya",
+          list:[],
+          extra:""
+        }
+      },
+      {
+        display: "Pemesanan Ganda",
+        value: "249",
+        popup: {
+          title: "Pemesanan Ganda",
+          main:"Untuk semua permintaan yang diajukan harus memenuhi kriteria berikut dibawah ini:",
+          list: [
+            { main: "Kedua pemesanan merupakan pemesanan penerbangan dengan tanggal, sektor dan rute yang sama (keberangkatan dan tujuan)", secondary: []},
+            { main: "Kedua pemesanan memiliki nama tamu yang sama", secondary: []},
+            { main: "Permintaan pengembalian biaya diajukan sebelum tanggal keberangkatan penerbangan", secondary: []}
+          ],
+          extra:"Mohon agar dapat diketahui bahwa pemesanan penerbangan yang dapat digunakan adalah pemesanan yang pertama yang ditentukan berdasarkan tanggal dan waktu pembelian. Pengajuan pengembalian biaya yang disetujui akan diproses untuk pemesanan penerbangan yang kedua atau berikutnya"
+        }
+      },
+      {
+        display: "Bebas pajak",
+        value: "109",
+        popup: {
+          title: "Bebas pajak",
+          main:"Pengembalian dana untuk pembelian bebas-pajak hanya berlaku untuk:",
+          list:[
+            { main: "Barang cacat", secondary: []},
+            { main: "Jaminan Harga Terendah (mencocokkan pembelian dengan harga yang lebih rendah )", secondary: []},
+            { main: "Pembatalan penerbangan *", secondary: []},
+            { main: "Penerbangan yang terlewat *", secondary: []},
+            { main: "Pembatalan pesanan *", secondary: []}
+          ],
+          extra:"* Untuk pembelian barang bebas pajak yang dibeli sebelum tanggal penerbangan"
+        }
+      },
+      {
+        display: "Penerbangan dibatalkan",
+        value: "511",
+        popup: {
+          title: "Pembatalan Penerbangan",
+          main:"Permintaan pengembalian biaya hanya dapat diajukan apabila penerbangan dibatalkan oleh AirAsia",
+          list:[],
+          extra:""
+        }
+      },
+      {
+        display: "Penerbangan Berubah Jadwal",
+        value: "513",
+        popup: {
+          title: "Perubahan Jadwal Penerbangan",
+          main: "Permintaan pengembalian biaya hanya dapat diajukan apabila penerbangan mengalami perubahan jadwal lebih dari 3 (tiga) jam dari jadwal semula",
+          list:[],
+          extra:""
+        }
+      }
     ]
   },
   "zh-cn": {
@@ -543,12 +910,87 @@ const TYPE_OPTIONS: Object = {
       {display: "退款要求", value: "86"},
     ],
     8: [
-      {display: "机场税", value: "245"},
-      {display: "重复付款", value: "250"},
-      {display: "重复预订", value: "249"},
-      {display: "免税", value: "109"},
-      {display: "航班取消", value: "511"},
-      {display: "航班调整", value: "513"}
+      {
+        display: "机场税",
+        value: "245",
+        popup: {
+          title:"机场税",
+          main:"退税申请须符合以下条件:",
+          list: [
+            { main: "须在航班起飞后的6个月内提出申请", secondary: []},
+            { main: "一个或以上的客人并无没有登机", secondary: []},
+            { main: "机场税将会退还至您办理预订时的支付渠道, 退款手续费(按每人每段航班算)将会产生", secondary: []},
+            {
+              main: "以下航班将会免除退款手续费", secondary: [
+                "所有泰国亚洲航空公司 (FD),亚航X泰国(XJ)印度亚洲航空(I5)航班",
+                "从泰国出发的所有航班",
+                "从香港出发的所有航班"
+              ]
+            }
+          ],
+          extra:"请注意：乘客如果没有乘搭已预定的亚洲航空从菲律宾马尼拉出发的航班，可以自订票日起一年内申请国际乘客服务费退款，免收退款手续费"
+        }
+      },
+      {
+        display: "重复付款",
+        value: "250",
+        popup: {
+          title:"重复支付",
+          main:"如果您同一个预订被收费两次或以上(如:信用卡被收费两次), 您可以对多收款项提出退款申请。符合退款条件的款项将会退至您原来支付第二笔或之后款项的相应支付渠道",
+          list: [],
+          extra:""
+        }
+      },
+      {
+        display: "重复预订",
+        value: "249",
+        popup: {
+          title:"重复预订",
+          main:"退款申请须符合以下条件:",
+          list: [
+            { main: "两个预订必须是同一个航班日期, 同样航线及地点(出发地及目的地)", secondary: []},
+            { main: "两个预订的乘客姓名须一致", secondary: []},
+            { main: "须在航班起飞之前提出申请", secondary: []}
+          ],
+          extra:"请注意, 我们将会保留您第一个预订(基于预订办理的日期及时间), 我们只会对第二个预订作出处理"
+        }
+      },
+      {
+        display: "免税",
+        value: "109",
+        popup: {
+          title:"免税",
+          main:"所购的免税品退款仅适用于:",
+          list: [
+            { main: "缺陷商品", secondary: []},
+            { main: "最低价格保证（此时您可以将您的所购物与更低的价格进行匹配)", secondary: []},
+            { main: "航班取消 *", secondary: []},
+            { main: "误机 *", secondary: []},
+            { main: "订单取消 *", secondary: []}
+          ],
+          extra:"* 仅限于预定的免税所购物"
+        }
+      },
+      {
+        display: "航班取消",
+        value: "511",
+        popup: {
+          title:"航班取消",
+          main:"如果您的航班因故被取消，您可以对此提出退款要求",
+          list: [],
+          extra:""
+        }
+      },
+      {
+        display: "航班调整",
+        value: "513",
+        popup: {
+          title:"航班时间更改",
+          main:"如果您的航班时间变动超过3小时或以上(从航班起飞时间起), 您可以对此提出退款要求",
+          list: [],
+          extra:""
+        }
+      }
     ]
   },
   "zh-hk": {
@@ -589,12 +1031,82 @@ const TYPE_OPTIONS: Object = {
       {display: "退款要求", value: "86"},
     ],
     8: [
-      {display: "機場稅", value: "245"},
-      {display: "雙重付款", value: "250"},
-      {display: "重複預訂", value: "249"},
-      {display: "免稅購物", value: "109"},
-      {display: "航班取消", value: "511"},
-      {display: "航班調整", value: "513"}
+      {
+        display: "機場稅", value: "245",
+        popup: {
+          title:"機場稅",
+          main:"退稅申請須符合以下條件:",
+          list:[
+            { main: "須在航班起飛後的6個月內提出申請", secondary: []},
+            { main: "一個或以上的客人並無沒有登機", secondary: []},
+            { main: "機場稅將會退還至您辦理預訂時的支付渠道, 退款手續費(按每人每段航班算)將會產生", secondary: []},
+            {
+              main: "以下航班將會免除退款手續費:",
+              secondary: [
+                  "所有泰國亞洲航空公司 (FD),亞航X泰國(XJ)印度亞洲航空(I5)航班",
+                  "從香港出發的所有航班。從泰國出發的所有航班",
+                  "從香港出發的所有航班"
+              ]
+            },
+          ],
+          extra:"請注意：乘客如果沒有乘搭已預定的亞洲航空從菲律賓馬尼拉出發的航班，可以自訂票日起一年內申請國際乘客服務費退款，免收退款手續費。搭已預定的亞洲航空從菲律賓馬尼拉出發的航班，可以自訂票日起一年內申請國際乘客服務費退款，免收退款手續費。"
+        }
+      },
+      {
+        display: "雙重付款", value: "250",
+        popup: {
+          title:"重複支付",
+          main:"如果您同一個預訂被收費兩次或以上(如:信用卡被收費兩次), 您可以對多收款項提出退款申請。符合退款條件的款項將會退至您原來支付第二筆或之後款項的相應支付渠道",
+          list:[],
+          extra:""
+        }
+      },
+      {
+        display: "重複預訂", value: "249",
+        popup: {
+          title:"重複預訂",
+          main:"退款申請須符合以下條件:",
+          list:[
+            { main: "兩個預訂必須是同一個航班日期, 同樣航線及地點(出發地及目的地)", secondary: []},
+            { main: "兩個預訂的乘客姓名須一致", secondary: []},
+            { main: "須在航班起飛之前提出申請", secondary: []}
+          ],
+          extra:"請注意, 我們將會保留您第一個預訂(基於預訂辦理的日期及時間), 我們只會對第二個預訂作出處理"
+        }
+      },
+      {
+        display: "免稅購物", value: "109",
+        popup: {
+          title:"免稅購物",
+          main:"只有以下情況可對已售出之免稅商品進行退款:",
+          list:[
+            { main: "損壞的貨品", secondary: ""},
+            { main: "符合最低價格擔保條款（當您提供更低價格之證明）", secondary: ""},
+            { main: "航班被取消 *", secondary: ""},
+            { main: "未能趕及登機 *", secondary: ""},
+            { main: "取消訂單 *", secondary: ""}
+          ],
+          extra:"* 只適用於預定之免稅商品"
+        }
+      },
+      {
+        display: "航班取消", value: "511",
+        popup: {
+          title:"航班取消",
+          main:"如果您的航班因故被取消，您可以對此提出退款要求",
+          list:[],
+          extra:""
+        }
+      },
+      {
+        display: "航班調整", value: "513",
+        popup: {
+          title:"航班時間更改",
+          main:"如果您的航班時間變動超過3小時或以上(從航班起飛時間起), 您可以對此提出退款要求",
+          list:[],
+          extra:""
+        }
+      }
     ]
   },
   "th-th": {
@@ -635,12 +1147,82 @@ const TYPE_OPTIONS: Object = {
       {display: "ขอเงินคืน", value: "86"},
     ],
     8: [
-      {display: "ภาษีสนามบิน", value: "245"},
-      {display: "จ่ายเงินซ้อน", value: "250"},
-      {display: "หมายเลขการสำรองที่นั่งซ้ำซ้อน", value: "249"},
-      {display: "ปลอดภาษี", value: "109"},
-      {display: "เที่ยวบินยกเลิก", value: "511"},
-      {display: "เที่ยวบินเปลี่ยนเวลา", value: "513"}
+      {
+        display: "ภาษีสนามบิน", value: "245",
+        popup: {
+          title:"ภาษีสนามบิน",
+          main:"หลักเกณฑ์การขอคืนค่าภาษีสนามบิน :",
+          list:[
+            { main: "จะต้องยื่นคำร้องภายใน 6 เดือนหลังจากกำหนดการเดินทาง", secondary: []},
+            { main: "มีผู้โดยสารอย่างน้อย 1 ท่านหรือทั้งหมด ไม่ได้เดินทางในหมายเลขการเดินทางดังกล่าว", secondary: []},
+            { main: "การคืนเงินจะดำเนินการคืนเข้าช่องทางการจ่ายเงินของหมายเลขการสำรองที่นั่งนั้นๆ และอาจมีค่าธรรมเนียมในการดำเนินการขอคืนค่าภาษีสนามบิน (ต่อท่านต่อเที่ยวบิน)", secondary: []},
+            {
+              main: "ค่าธรรมเนียมการขอคืนค่าภาษีสนามบิน จะได้รับการยกเว้นในกรณี ดังนี้ :",
+              secondary: [
+                "เที่ยวบินที่ดำเนินการโดยสายการบินไทยแอร์เอเชีย (FD) สายการบินไทยแอร์เอเชียเอ็กซ์ (XJ) และ สายการบินแอร์เอเชียอินเดีย (I5)",
+                "เที่ยวบินที่เดินทางออกจากประเทศไทย",
+                "เที่ยวบินที่เดินทางออกจากฮ่องกง"
+              ]
+            }
+          ],
+          extra:"หมายเหตุ : ผู้โดยสารที่มีเที่ยวบินออกจากประเทศฟิลิปปินส์และไม่ได้เดินทางสามารถขอคืนค่าภาษีสนามบิน (Passenger Service Charge) ได้ภายในหนึ่งปีนับจากวันที่ได้ทำการสำรองที่นั่ง โดยจะได้รับการยกเว้นค่าธรรมเนียมการขอคืนเงิน"
+        }
+      },
+      {
+        display: "จ่ายเงินซ้อน", value: "250",
+        popup: {
+          title:"การเรียกเก็บเงินซ้ำซ้อน",
+          main:"การขอคืนค่าโดยสารอันเกิดจากการถูกเรียกเก็บเงินซ้ำซ้อนสามารถดำเนินการได้ หากพบว่ามีการเรียกเก็บเงินภายใต้หมายเลขการสำรองที่นั่งเดียวกันมากกว่าหนึ่งครั้ง (ตัวอย่างเช่น บัตรเครดิตมีการตัดยอดสองครั้ง) การคืนเงินในคำร้องที่ได้รับการอนุมัติ จะดำเนินการคืนเข้าช่องทางการจ่ายเงินที่ถูกเรียกเก็บภายหลัง",
+          list:[],
+          extra:""
+        }
+      },
+      {
+        display: "หมายเลขการสำรองที่นั่งซ้ำซ้อน", value: "249",
+        popup: {
+          title:"การสำรองที่นั่งซ้ำซ้อน",
+          main:"หลักเกณฑ์การขอคืนค่าโดยสารในกรณีหมายเลขการสำรองที่นั่งซ้ำซ้อน :",
+          list:[
+            { main: "หมายเลขการสำรองที่นั่งทั้งสองจะต้องมีวันเดินทาง หมายเลขเที่ยวบิน รวมถึง เส้นทางบินทั้งไปและกลับเหมือนกัน", secondary: []},
+            { main: "หมายเลขการสำรองที่นั่งทั้งสองจะต้องมีชื่อผู้โดยสาร และจำนวนผู้โดยสารเหมือนกัน", secondary: []},
+            { main: "จะต้องยื่นคำร้องก่อนกำหนดการเดินทาง", secondary: []}
+          ],
+          extra:"หมายเหตุ : หมายเลขการสำรองที่นั่งที่ได้ทำการสำรองและได้รับการยืนยันในครั้งแรก จะเป็นหมายเลขการสำรองที่นั่งที่ใช้เดินทาง ผู้โดยสารสามารถยีนคำร้องขอคืนเงินในหมายเลขการสำรองที่นั่งครั้งหลังเท่านั้น การคืนเงินในคำร้องที่ได้รับการอนุมัติ จะดำเนินการคืนเข้าช่องทางการจ่ายเงินของหมายเลขการสำรองที่นั่งที่ทำการสำรองและได้รับการยืนยันภายหลัง"
+        }
+      },
+      {
+        display: "ปลอดภาษี", value: "109",
+        popup: {
+          title:"ปลอดภาษี",
+          main:"สามารถขอเงินคืนสำหรับสินค้าปลอดภาษีในกรณีต่อไปนี้เท่านั้น:",
+          list:[
+            { main: "สินค้ามีตำหนิ", secondary: []},
+            { main: "รับประกันราคาต่ำสุด (คุณพบสินค้าราคาถูกกว่า)", secondary: []},
+            { main: "ยกเลิกเที่ยวบิน *", secondary: []},
+            { main: "พลาดเที่ยวบิน *", secondary: []},
+            { main: "ยกเลิกคำสั่งซื้อ *", secondary: []}
+          ],
+          extra:"* สำหรับสินค้าปลอดภาษีที่จองล่วงหน้าเท่านั้น"
+        }
+      },
+      {
+        display: "เที่ยวบินยกเลิก", value: "511",
+        popup: {
+          title:"เที่ยวบินยกเลิก",
+          main:"การขอคืนเงินกรณีเที่ยวบินยกเลิก สามารถทำได้ในกรณีที่สายการบินเป็นผู้ทำการยกเลิกเที่ยวบินนั้น",
+          list:[],
+          extra:""
+        }
+      },
+      {
+        display: "เที่ยวบินเปลี่ยนเวลา", value: "513",
+        popup: {
+          title:"เที่ยวบินเปลี่ยนแปลงตารางเวลา",
+          main:"การขอคืนเงินกรณีเที่ยวบินเปลี่ยนแปลงตารางเวลา สามารถทำได้หากมีการเปลี่ยนแปลงตารางเวลามากกว่า 3 ชั่วโมงจากตารางเวลาเดิม",
+          list:[],
+          extra:""
+        }
+      }
     ]
   }
 }

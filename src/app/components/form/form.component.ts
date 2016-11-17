@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   labels: Object = this.formService.getLabels(this.preferredLanguage);
   caseOptions: Object[] = this.formService.getCaseOptions(this.preferredLanguage);
   flightOptions: Object[] = this.formService.getFlightOptions();
+  refund: any;
   routingCodes: string[];
   wellnetOptions: Object[];
   paymentMethods: Object[];
@@ -135,6 +136,12 @@ export class FormComponent implements OnInit {
   }
   fetchTypeOption(option:string){
     this.typeOptions = this.formService.getTypeOptions(this.preferredLanguage, option);
+  }
+  bindType(value:string){
+    this.refund = this.typeOptions.filter((typeData:any)=>{
+      return typeData.value === value;
+    })[0];
+    console.log(this.refund.popup)
   }
   validateNonUnicode(input:any, field:string){
     const chineseUnicodePattern = /[\u2E80-\u2EFF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\ud840-\ud868\udc00-\udfff\ud869\udc00-\udede]/g;
