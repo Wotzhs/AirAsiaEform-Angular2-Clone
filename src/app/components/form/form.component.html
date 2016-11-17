@@ -138,7 +138,7 @@
       </div>
       <div class="col-md-9">
         <div class="col-md-5 col-xs-12">
-          <select class="form-control" formControlName="type" (change)="bindType($event.target.value); case.value === '8' ? refundModal.show() : null">
+          <select class="form-control" formControlName="type" (change)="case.value === '8' ? bindType($event.target.value) : null; case.value === '8' ? refundModal.show() : null">
             <option *ngFor="let typeOption of typeOptions" [value]="typeOption.value">{{typeOption.display}}</option>
           </select>
           <label for="casecategory" *ngIf="!eform.controls.type.valid && (submittedWithErrors || eform.controls.type.touched)"

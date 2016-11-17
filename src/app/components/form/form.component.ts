@@ -91,15 +91,15 @@ export class FormComponent implements OnInit {
     const bankSubFields = this.eform.controls['bank']['controls'];
     const wellnetSubFields = this.eform.controls['wellnet']['controls'];
     paymentMethodChanges.subscribe((paymentMethodValue:any)=>{
-      this.removeRequired(bankSubFields);
+      this.required(bankSubFields, 'remove');
       if (paymentMethodValue === '2' || paymentMethodValue === '3'){
-        this.setRequired(bankSubFields);
+        this.required(bankSubFields, 'set');
         this.currencies = this.formService.getCurrencies();
         this.routingCodes = this.formService.getRoutingCodes();
       } else if (paymentMethodValue === '5') {
         this.wellnetOptions = this.formService.getWellnetOptions(this.preferredLanguage);
-        this.setRequired(['name', 'accountholdername', 'accountnumber'], 'bank');
-        this.setRequired(wellnetSubFields);
+        this.required(['name', 'accountholdername', 'accountnumber'], 'set', 'bank');
+        this.required(wellnetSubFields, 'set');
         this.resetField(bankSubFields, ['name', 'accountholdername', 'accountnumber']);
       } else {
         this.resetField(bankSubFields);
@@ -113,7 +113,7 @@ export class FormComponent implements OnInit {
     if (this.eform.controls['case'].value === "8"){
       this.paymentMethods = this.formService.getPaymentMethods(this.preferredLanguage);
       this.acknowledgementMesssage = this.formService.getAcknowledgementMessage(this.preferredLanguage);
-      this.setRequired([this.eform.controls['acknowledged']]);
+      this.required([this.eform.controls['acknowledged']], 'set');
     }
   }
   haha(eformValues:any, eformValid:boolean){
@@ -152,10 +152,10 @@ export class FormComponent implements OnInit {
   checkIfChineseCurrency(currency:string){
     if (currency === "cny" || currency === "twd"){
       this.chineseCurrency = currency;
-      this.setRequired(this.eform.controls['banknonenglish']['controls']);
+      this.required(this.eform.controls['banknonenglish']['controls'], 'set');
     } else {
       this.chineseCurrency = '';
-      this.removeRequired(this.eform.controls['banknonenglish']['controls']);
+      this.required(this.eform.controls['banknonenglish']['controls'], 'remove');
     }
   }
   resetCurrency(){
@@ -165,24 +165,19 @@ export class FormComponent implements OnInit {
   triggerValidation(){
     this.submittedWithErrors = true;
   }
-  setRequired(fields:any, formgroup:string = ''){
+  required(fields:any, action:string, formgroup:string = ''){
+    let setOrRemove = (action === "set") ? Validators.required : null
     if (fields instanceof Array && formgroup){
       fields.map((field)=>{
-        this.eform.controls[formgroup]['controls'][field].setValidators(Validators.required);
+        this.eform.controls[formgroup]['controls'][field].setValidators(setOrRemove);
         this.eform.controls[formgroup]['controls'][field].updateValueAndValidity();
       })
     } else {
       Object.keys(fields).map((field)=>{
-        fields[field].setValidators(Validators.required);
+        fields[field].setValidators(setOrRemove);
         fields[field].updateValueAndValidity();
       })
     }
-  }
-  removeRequired(fields:Object){
-    Object.keys(fields).map((field)=>{
-      fields[field].setValidators(null);
-      fields[field].updateValueAndValidity();
-    })
   }
   resetField(fields:Object, exclude:string[] = ['']){
     Object.keys(fields).map((field)=>{
