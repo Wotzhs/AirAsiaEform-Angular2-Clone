@@ -1,4 +1,4 @@
-**This is a experimental/learning project with the aim to learn Angular 2 & the other javascript frameworks**
+**This is a experimental/learning project of cloning AirAsia's e-Form with the aim to learn Angular 2 & the other javascript frameworks**
 
 **To see demo:**
 
