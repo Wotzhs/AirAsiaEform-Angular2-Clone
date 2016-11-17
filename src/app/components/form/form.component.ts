@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
   //   return '<option value="'+country.dial+'">'+country.name+' ('+country.code+')';
   // }).join("</option>").concat("</option>")
   timemask = [/[0-1]/, /[1-9]/, ':', /[0-5]/, /[0-9]/];
+  bookingFieldRequired: boolean = false;
 
   constructor(
     private formService: FormService,
@@ -116,10 +117,9 @@ export class FormComponent implements OnInit {
       this.required([this.eform.controls['acknowledged']], 'set');
     }
   }
-  haha(eformValues:any, eformValid:boolean){
+  validateForm(eformValues:any, eformValid:boolean){
     console.log(eformValues)
     if (!eformValid) { return this.submittedWithErrors = true; }
-
   }
   setMobileDialInfo(selected:any){
     this.selectedMobileCode = selected.code;
@@ -141,7 +141,19 @@ export class FormComponent implements OnInit {
     this.refund = this.typeOptions.filter((typeData:any)=>{
       return typeData.value === value;
     })[0];
-    console.log(this.refund.popup)
+    this.updateBookingNumberField(value)
+  }
+  updateBookingNumberField(value:string){
+    const typeOptionRequiresBookingNumber = /(109|245|249|250|511|513|519)/;
+    const bookingField = this.eform.controls['bookingnumber'];
+    if (typeOptionRequiresBookingNumber.test(value)){
+      this.required([bookingField], 'set')
+      this.bookingFieldRequired = true;
+    } else {
+      this.required([bookingField], 'remove');
+      this.bookingFieldRequired = false;
+    }
+    this.triggerValidation();
   }
   validateNonUnicode(input:any, field:string){
     const chineseUnicodePattern = /[\u2E80-\u2EFF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\ud840-\ud868\udc00-\udfff\ud869\udc00-\udede]/g;
@@ -166,7 +178,7 @@ export class FormComponent implements OnInit {
     this.submittedWithErrors = true;
   }
   required(fields:any, action:string, formgroup:string = ''){
-    let setOrRemove = (action === "set") ? Validators.required : null
+    let setOrRemove = (action === "set") ? Validators.required : null;
     if (fields instanceof Array && formgroup){
       fields.map((field)=>{
         this.eform.controls[formgroup]['controls'][field].setValidators(setOrRemove);

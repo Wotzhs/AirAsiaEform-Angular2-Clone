@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<form [formGroup]="eform" (ngSubmit)="haha(eform.value, eform.valid)">
+<form [formGroup]="eform" (ngSubmit)="validateForm(eform.value, eform.valid)">
   <div class="well">
     <div class="row form-group"> <!-- first last name input -->
       <div class="col-md-3"
@@ -147,13 +147,18 @@
       </div>
     </div> <!-- end of type select -->
 
-    <div class="row form-group"> <!-- booking number input -->
+    <div class="row form-group" [class.has-error]="!eform.controls.bookingnumber.valid && (submittedWithErrors || eform.controls.bookingnumber.touched)"> <!-- booking number input -->
       <div class="col-md-3">
-        <label for="bookingnumber" class="control-label">{{labels.bookingnumber.main}}</label>
+        <label for="bookingnumber" class="control-label">
+          <span *ngIf="bookingFieldRequired">*</span>
+            {{labels.bookingnumber.main}}
+        </label>
       </div>
       <div class="col-md-9">
         <div class="col-md-5 col-xs-12">
           <input class="form-control" type="text" formControlName="bookingnumber">
+          <label for="flightcode" *ngIf="!eform.controls.bookingnumber.valid && (submittedWithErrors || eform.controls.bookingnumber.touched)"
+              class="control-label">{{labels.bookingnumber.err}}</label>
         </div>
       </div>
     </div> <!-- end of booking number input -->
