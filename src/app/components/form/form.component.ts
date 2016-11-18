@@ -31,6 +31,7 @@ export class FormComponent implements OnInit {
   // }).join("</option>").concat("</option>")
   timemask = [/[0-1]/, /[1-9]/, ':', /[0-5]/, /[0-9]/];
   bookingFieldRequired: boolean = false;
+  formIntialValue: FormGroup;
 
   constructor(
     private formService: FormService,
@@ -95,12 +96,14 @@ export class FormComponent implements OnInit {
       this.required(bankSubFields, 'remove');
       if (paymentMethodValue === '2' || paymentMethodValue === '3'){
         this.required(bankSubFields, 'set');
+        this.bulkMarkAsTouched(bankSubFields);
         this.currencies = this.formService.getCurrencies();
         this.routingCodes = this.formService.getRoutingCodes();
       } else if (paymentMethodValue === '5') {
         this.wellnetOptions = this.formService.getWellnetOptions(this.preferredLanguage);
         this.required(['name', 'accountholdername', 'accountnumber'], 'set', 'bank');
         this.required(wellnetSubFields, 'set');
+        this.bulkMarkAsTouched(wellnetSubFields);
         this.resetField(bankSubFields, ['name', 'accountholdername', 'accountnumber']);
       } else {
         this.resetField(bankSubFields);
@@ -119,7 +122,12 @@ export class FormComponent implements OnInit {
   }
   validateForm(eformValues:any, eformValid:boolean){
     console.log(eformValues)
-    if (!eformValid) { return this.submittedWithErrors = true; }
+
+    let fd = new FormData(eformValues);
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', '/');
+    xhr.send(JSON.stringify(eformValues))
+    console.log(xhr.response)
   }
   setMobileDialInfo(selected:any){
     this.selectedMobileCode = selected.code;
@@ -153,7 +161,7 @@ export class FormComponent implements OnInit {
       this.required([bookingField], 'remove');
       this.bookingFieldRequired = false;
     }
-    this.triggerValidation();
+    this.eform.controls['bookingnumber'].markAsTouched();
   }
   validateNonUnicode(input:any, field:string){
     const chineseUnicodePattern = /[\u2E80-\u2EFF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\ud840-\ud868\udc00-\udfff\ud869\udc00-\udede]/g;
@@ -165,6 +173,7 @@ export class FormComponent implements OnInit {
     if (currency === "cny" || currency === "twd"){
       this.chineseCurrency = currency;
       this.required(this.eform.controls['banknonenglish']['controls'], 'set');
+      this.bulkMarkAsTouched(this.eform.controls['banknonenglish']['controls']);
     } else {
       this.chineseCurrency = '';
       this.required(this.eform.controls['banknonenglish']['controls'], 'remove');
@@ -174,8 +183,10 @@ export class FormComponent implements OnInit {
     this.eform.controls['bank']['controls']['currency'].reset();
     this.chineseCurrency = '';
   }
-  triggerValidation(){
-    this.submittedWithErrors = true;
+  bulkMarkAsTouched(fields:any){
+    Object.keys(fields).map((field)=>{
+        fields[field].markAsTouched();
+    })
   }
   required(fields:any, action:string, formgroup:string = ''){
     let setOrRemove = (action === "set") ? Validators.required : null;
@@ -197,5 +208,55 @@ export class FormComponent implements OnInit {
         fields[field].reset();
       }
     })
+  }
+  resetToInitialValue(){
+    this.eform = this.formBuilder.group({
+      firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{1,}')]],
+      lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z]{1,}')]],
+      email: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]],
+      mobilenumdialcode: ['MY', Validators.required],
+      mobilenum: [60, [Validators.required, Validators.pattern('[0-9]{5,}')]],
+      homenumdialcode: ['MY'],
+      homenum: [60],
+      case: ['', Validators.required],
+      type: ['', Validators.required],
+      bookingnumber: [''],
+      flightcode: ['', Validators.required],
+      flightnumber: ['', Validators.required],
+      flightdate: [''],
+      flighttime: [''],
+      flighthour: ['am'],
+      attachment1: [''],
+      attachment2: [''],
+      attachment3: [''],
+      feedback: ['', Validators.required],
+      paymentmethod: ['1'],
+      bank: this.formBuilder.group({
+        currency: [''],
+        name: [''],
+        accountholdername: [''],
+        accountnumber: [''],
+        branch: [''],
+        province: [''],
+        city: [''],
+        routecode: [''],
+        routenumber: ['']
+      }),
+      banknonenglish: this.formBuilder.group({
+        name: [''],
+        accountholdername: [''],
+        branch: [''],
+        province: [''],
+        city: ['']
+      }),
+      wellnet: this.formBuilder.group({
+        bankcode: [''],
+        branchcode: [''],
+        accounttype: ['']
+      }),
+      acknowledged: ['']
+    })
+    this.setMobileDialInfo({code:"MY", dial: "60"});
+    this.setHomeDialInfo({code:"MY", dial: "60"});
   }
 }

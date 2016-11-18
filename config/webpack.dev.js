@@ -18,7 +18,11 @@ module.exports = webpackMerge(commonConfig, {
   ],
 
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites : [
+        { from: /dist\/assets\/logo-airasia\.png/, to: 'src/assets/logo-airasia.png' }
+      ]
+    },
     stats: 'minimal'
   }
 });

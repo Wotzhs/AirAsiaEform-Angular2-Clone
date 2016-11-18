@@ -250,7 +250,7 @@
         </div>
         <div class="col-md-9">
           <div class="col-md-5" [class.has-error]="!eform.controls.paymentmethod.valid && (submittedWithErrors || eform.controls.paymentmethod.touched)">
-            <select class="form-control" #pymtMthd formControlName="paymentmethod" (change)="triggerValidation(); resetCurrency()">
+            <select class="form-control" #pymtMthd formControlName="paymentmethod" (change)="resetCurrency()">
               <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.value" [selected]="paymentMethod.value === '1'">{{paymentMethod.display}}</option>
             </select>
           </div>
@@ -511,7 +511,7 @@
     <div class="row">
       <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"></div>
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <button type="button" class="btn btn-danger btn-block">
+        <button type="button" class="btn btn-danger btn-block" (click)="resetToInitialValue()">
           <span class="glyphicon glyphicon-trash"></span>&emsp;
           {{labels.button.reset}}
         </button>
